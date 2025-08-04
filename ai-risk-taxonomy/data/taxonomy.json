@@ -1,0 +1,620 @@
+{
+  "metadata": {
+    "title": "AI Risk Taxonomy",
+    "description": "A comprehensive taxonomy of AI risks organized by OECD principles",
+    "version": "1.0",
+    "total_risks": 87,
+    "last_updated": "2025-06-11"
+  },
+  "risks": [
+    {
+      "OECD Principle": "Inclusive growth, sustainable development and wellbeing",
+      "Risk domain": "Unsustainable Design & Disregard",
+      "Risk type": "Adverse environmental impact",
+      "Vector": "Creates high levels of e waste",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Inclusive growth, sustainable development and wellbeing",
+      "Risk domain": "Unsustainable Design & Disregard",
+      "Risk type": "Adverse environmental impact",
+      "Vector": "Deployment leads to AI causing unforeseen environmental consequences",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Inclusive growth, sustainable development and wellbeing",
+      "Risk domain": "Unsustainable Design & Disregard",
+      "Risk type": "Adverse environmental impact",
+      "Vector": "Incentivises environmentally damaging behaviours",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Inclusive growth, sustainable development and wellbeing",
+      "Risk domain": "Unsustainable Design & Disregard",
+      "Risk type": "Adverse environmental impact",
+      "Vector": "Depletion of global physical resources",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Inclusive growth, sustainable development and wellbeing",
+      "Risk domain": "Unsustainable Design & Disregard",
+      "Risk type": "Lack of transparency around sustainability",
+      "Vector": "Opaque resource consumption requirements & environmental impacts",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual autonomy",
+      "Vector": "Removing human choice through automation",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual autonomy",
+      "Vector": "Coercive or manipulative system design",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual autonomy",
+      "Vector": "Overriding human judgment",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual autonomy",
+      "Vector": "Inability to contest decisions",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual freedoms",
+      "Vector": "Restriction of freedom of expression",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual freedoms",
+      "Vector": "Interference with freedom of association",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual freedoms",
+      "Vector": "Violation of human dignity",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual freedoms",
+      "Vector": "Infringement of religious freedoms",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of individual freedoms",
+      "Vector": "Denial of cultural rights",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Loss of Freedoms & Autonomy",
+      "Risk type": "Loss of collective freedoms",
+      "Vector": "Interference with collective governance (e.g. vote manipulation)",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Loss of data control",
+      "Vector": "People do not know where their data is going / who profits from their data, or stop it",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Loss of data control",
+      "Vector": "People cannot or do not know how to access or modify their own data",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Loss of data control",
+      "Vector": "People cannot delete their data (potentially damaging or sensitive)",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Loss of data control",
+      "Vector": "There are no channels to contact to establish data control (e.g. delete or amend)",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Data exploitation",
+      "Vector": "Data used beyond original stated purpose",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Data exploitation",
+      "Vector": "Unauthorized data monetisation",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Data exploitation",
+      "Vector": "Data is shared with third parties without consent",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Data exploitation",
+      "Vector": "Manipulation through collected personal information",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Lack of informed consent",
+      "Vector": "Absent, incomplete, or misleading informed consent process",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Privacy Violation",
+      "Risk type": "Lack of informed consent",
+      "Vector": "Unauthorised surveillance",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "Specific groups benefit or are harmed disproportionately",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "Odds of advantageous outcome are unequal",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "AI does not work for or works improperly for a class or group",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "AI-generated content misrepresents or erases certain groups' experiences or perspectives",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "Certain groups receive disproportionate false positives or false negatives in AI decisions",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "AI is unavailable to or less accessible by a class or a group",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Human rights and democratic values, including fairness and privacy",
+      "Risk domain": "Discriminatory impact",
+      "Risk type": "Bias and discrimination",
+      "Vector": "Systems reinforce or amplify existing stereotypes in their outputs",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of documentation transparency",
+      "Vector": "System documentation is insufficient for oversight",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of documentation transparency",
+      "Vector": "Model cards or datasheets are incomplete or missing",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of documentation transparency",
+      "Vector": "Audit trails are inadequate or unavailable",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of documentation transparency",
+      "Vector": "Incident reports are not properly logged or maintained",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of transparency around data practices",
+      "Vector": "Data provenance is opaque",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of transparency around data practices",
+      "Vector": "Data collection methods (and ethics) are opaque",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of transparency around data practices",
+      "Vector": "Data sharing arrangements are not disclosed",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of transparency around data practices",
+      "Vector": "Data retention policies are unclear",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Accountability",
+      "Risk domain": "Governance and accountability failure",
+      "Risk type": "Lack of transparency around data practices",
+      "Vector": "Changes in data practices occur without notification",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "People do not understand how decisions are made",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "Scope and capabilities of AI systems are not clear to users",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "Limitations of AI systems are not disclosed to users",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "Role of AI in decisions/processes is not disclosed",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "System updates occur without appropriate notification",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "Changes in AI capabilities are not communicated",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "Shifts in operational parameters are not disclosed",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Lack of system transparency (how the AI works)",
+      "Vector": "Unclear confidence levels in outputs (e.g. indicating more certainty than really exists)",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Inability to interpret model decisions or behaviour patterns, causing poor safety or ethical outcomes",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Unexplainable feature interactions in decisions (e.g. resulting in unexplained biases)",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Unclear decision criteria makes system difficult to debug or improve safety",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Unclear causal relationships",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Unexplained edge cases causes risks in unexpected situations and makes it hard to fix them",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Unexplainable sequencing of inferences negatively affects outcomes and cannot be fixed",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Obscure decision making processes",
+      "Vector": "Decision or behavioural drift over time",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Poor or absent decision making logging process",
+      "Vector": "Decision histories are not available, accurate enough, or processed properly for useful evaluation and improvement",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Absent or inadequate general documentation",
+      "Vector": "Documentation is unavailable or not sufficient to support checks or monitoring",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Absence of recourse",
+      "Vector": "A person or community experiencing an adverse impact cannot find anyone to report it to",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Absence of recourse",
+      "Vector": "A person or community likewise cannot seek recompense for harms",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Transparency and explainability",
+      "Risk domain": "System Opacity & Inexplicability",
+      "Risk type": "Absence of recourse",
+      "Vector": "Some groups face higher barriers than others to contesting or appealing AI decisions",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "External Security Threats",
+      "Risk type": "Adversarial Attack",
+      "Vector": "External manipulation of deployed system causing harmful decisions",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "External Security Threats",
+      "Risk type": "Adversarial Attack",
+      "Vector": "Compromise of development pipeline leading to harmful system behaviours",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "External Security Threats",
+      "Risk type": "Adversarial Attack",
+      "Vector": "Unauthorised access to system capabilities enabling infrastructure attacks",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "External Security Threats",
+      "Risk type": "Data Breach",
+      "Vector": "Targeted data extraction by state actors or threat groups",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "External Security Threats",
+      "Risk type": "Data Breach",
+      "Vector": "Unintended exposure of sensitive or prohibited information with no threat actor",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "External Security Threats",
+      "Risk type": "Data Breach",
+      "Vector": "Theft of sensitive data for commercial exploitation",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "System Integrity",
+      "Risk type": "Architecture",
+      "Vector": "Self-modification of core constraints by the system",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "System Integrity",
+      "Risk type": "Architecture",
+      "Vector": "Corruption of internal representations leading to processing errors",
+      "Generic Insight Level": "Known"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "System Integrity",
+      "Risk type": "Architecture",
+      "Vector": "Aggressive resource optimisation causing system instability",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "System Integrity",
+      "Risk type": "Processing",
+      "Vector": "Accumulating errors in system's world model leading to harmful actions",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "System Integrity",
+      "Risk type": "Processing",
+      "Vector": "Catastrophic performance failures under edge cases or context shifts",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "System Integrity",
+      "Risk type": "Processing",
+      "Vector": "Integration failures with external systems causing unsafe behaviour",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Runtime Control",
+      "Vector": "System developing methods to bypass control mechanisms",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Runtime Control",
+      "Vector": "System optimisation processes evolving to counteract restrictions",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Runtime Control",
+      "Vector": "Development of covert manipulation of human operators",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Safety Boundaries",
+      "Vector": "System optimises for hidden objectives while maintaining apparent compliance",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Safety Boundaries",
+      "Vector": "Runaway optimisation feedback loops causing accelerating negative impacts",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Oversight",
+      "Vector": "System complexity exceeding effective human oversight capabilities",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Control & Oversight",
+      "Risk type": "Oversight",
+      "Vector": "Concealment of system activities from monitoring mechanisms",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Capability Development",
+      "Vector": "Rapid development of capabilities beyond intended scope",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Capability Development",
+      "Vector": "Emergence of unintended self-improvement capabilities",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Capability Development",
+      "Vector": "Novel forms of system-environment interaction causing harm",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Optimisation",
+      "Vector": "Internal subsystem competition leading to harmful outcomes",
+      "Generic Insight Level": "Foreseeable"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Multi-agent",
+      "Vector": "Emergence of harmful behaviours from system networks exceeding individual capabilities",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Multi-agent",
+      "Vector": "Collective system behaviours circumventing individual safety measures",
+      "Generic Insight Level": "Emergent"
+    },
+    {
+      "OECD Principle": "Robustness, security and safety",
+      "Risk domain": "Emergent Behaviour",
+      "Risk type": "Multi-agent",
+      "Vector": "Large-scale harm from uncoordinated actions across multiple systems",
+      "Generic Insight Level": "Emergent"
+    }
+  ]
+}

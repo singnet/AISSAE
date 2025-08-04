@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AISaE Project Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .login-container {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .login-container h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .login-container p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .tab-container {
+            display: flex;
+            border-bottom: 2px solid #f1f3f4;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .tab:hover {
+            background: #f8f9fa;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .help-text {
+            font-size: 0.875rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .project-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .project-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-healthy { background: #d4edda; color: #155724; }
+        .status-attention { background: #fff3cd; color: #856404; }
+        .status-unknown { background: #e2e3e5; color: #383d41; }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-card .metric {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .taxonomy-info {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .taxonomy-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .taxonomy-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .taxonomy-link:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AISaE Project Resources</h1>
+            <p>Register and manage your project with the Framework</p>
+        </div>
+        
+        <div class="content">
+            <!-- Login Screen -->
+            <div id="login-screen">
+                <div class="login-container">
+                    <h2>Access Required</h2>
+                    <p>Please enter the access code to continue</p>
+                    
+                    <div id="login-alert" class="alert"></div>
+                    
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="access-code">Access Code</label>
+                            <input type="password" id="access-code" required 
+                                   placeholder="Enter access code">
+                        </div>
+                        
+                        <button type="submit" class="btn">
+                            <span>Access System</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Main Interface (hidden initially) -->
+            <div id="main-interface" style="display: none;">
+                <div class="tab-container">
+                    <button class="tab active" onclick="showTab('register')">Register Project</button>
+                    <button class="tab" onclick="showTab('update')">Update Project</button>
+                    <button class="tab" onclick="showTab('dashboard')">Dashboard</button>
+                    <button class="tab" onclick="showTab('taxonomy')">Risk Taxonomy</button>
+                </div>
+
+                <!-- Register Tab -->
+                <div id="register" class="tab-content active">
+                    <h2>Register New Project</h2>
+                    <p>Register your repository to start tracking your AISaE implementation.</p>
+                    
+                    <div id="register-alert" class="alert"></div>
+                    
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="repo-url">Repository URL *</label>
+                            <input type="url" id="repo-url" required 
+                                   placeholder="https://github.com/username/repository">
+                            <div class="help-text">Your public GitHub repository URL</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email">Contact Email (optional)</label>
+                            <input type="email" id="contact-email" 
+                                   placeholder="your.email@example.com">
+                            <div class="help-text">For important updates about your project</div>
+                        </div>
+                        
+                        <button type="submit" class="btn">
+                            <span>Register Project</span>
+                        </button>
+                        
+                        <div class="loading" id="register-loading">
+                            <div class="spinner"></div>
+                            <span>Registering project...</span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Update Tab -->
+                <div id="update" class="tab-content">
+                    <h2>Update Project</h2>
+                    <p>Scan your repository for updated template content and refresh your health score.</p>
+                    
+                    <div id="update-alert" class="alert"></div>
+                    
+                    <form id="update-form">
+                        <div class="form-group">
+                            <label for="project-id">Project ID *</label>
+                            <input type="text" id="project-id" required 
+                                   placeholder="12345678-1234-1234-1234-123456789abc"
+                                   pattern="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}">
+                            <div class="help-text">The UUID you received when registering your project</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="update-repo-url">Repository URL *</label>
+                            <input type="url" id="update-repo-url" required 
+                                   placeholder="https://github.com/username/repository">
+                            <div class="help-text">Must match the repository URL from registration</div>
+                        </div>
+                        
+                        <button type="submit" class="btn">
+                            <span>Update Project</span>
+                        </button>
+                        
+                        <div class="loading" id="update-loading">
+                            <div class="spinner"></div>
+                            <span>Updating project data...</span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Dashboard Tab -->
+                <div id="dashboard" class="tab-content">
+                    <h2>Project Dashboard</h2>
+                    <p>View your project status and progress through the AISaE framework.</p>
+                    
+                    <div id="dashboard-alert" class="alert"></div>
+                    
+                    <form id="dashboard-form">
+                        <div class="form-group">
+                            <label for="dashboard-project-id">Project ID *</label>
+                            <input type="text" id="dashboard-project-id" required 
+                                   placeholder="12345678-1234-1234-1234-123456789abc"
+                                   pattern="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}">
+                            <div class="help-text">Enter your Project ID to view dashboard</div>
+                        </div>
+                        
+                        <button type="submit" class="btn">
+                            <span>Load Dashboard</span>
+                        </button>
+                        
+                        <div class="loading" id="dashboard-loading">
+                            <div class="spinner"></div>
+                            <span>Loading project data...</span>
+                        </div>
+                    </form>
+                    
+                    <div id="dashboard-content" style="display: none;">
+                        <div class="project-info">
+                            <h3 id="project-name">Project Name</h3>
+                            <p><strong>Repository:</strong> <a id="project-repo" href="#" target="_blank">Repository URL</a></p>
+                            <p><strong>Status:</strong> <span id="project-status" class="status-badge">Unknown</span></p>
+                            <p><strong>Last Updated:</strong> <span id="project-updated">Never</span></p>
+                        </div>
+                        
+                        <div class="dashboard-grid">
+                            <div class="dashboard-card">
+                                <h3>Health Score</h3>
+                                <div class="metric" id="health-score">0</div>
+                                <div>/100</div>
+                            </div>
+                            <div class="dashboard-card">
+                                <h3>Classification</h3>
+                                <div class="metric" id="classification-status">❌</div>
+                                <div>Complete</div>
+                            </div>
+                            <div class="dashboard-card">
+                                <h3>Approach</h3>
+                                <div class="metric" id="approach-status">❌</div>
+                                <div>Chosen</div>
+                            </div>
+                            <div class="dashboard-card">
+                                <h3>Risk Assessment</h3>
+                                <div class="metric" id="risk-status">❌</div>
+                                <div>Complete</div>
+                            </div>
+                        </div>
+                        
+                        <div id="project-details" class="project-info">
+                            <h3>Project Details</h3>
+                            <div id="details-content"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taxonomy Tab -->
+                <div id="taxonomy" class="tab-content">
+                    <h2>AISaE Risk Taxonomy</h2>
+                    <p>Explore the comprehensive risk taxonomy for AI Safety and Ethics projects.</p>
+                    
+                    <div class="taxonomy-info">
+                        <h3>Interactive Risk Taxonomy</h3>
+                        <p>The AISaE Risk Taxonomy provides a structured approach to identifying and categorising AI-related risks across different domains and contexts. This interactive tool helps you explore risk categories, understand their relationships, and identify relevant risks for your project.</p>
+                        
+                        <a href="taxonomy.html" class="taxonomy-link" target="_blank">
+                            🔍 Open Risk Taxonomy Tool
+                        </a>
+                    </div>
+                    
+                    <div class="project-info">
+                        <h3>How to Use the Taxonomy</h3>
+                        <p><strong>1. Explore Categories:</strong> Browse through different risk domains and facets</p>
+                        <p><strong>2. Filter by Context:</strong> Use filters to find risks relevant to your project type</p>
+                        <p><strong>3. Export Selections:</strong> Download selected risks for your risk register</p>
+                        <p><strong>4. Integration:</strong> Copy risk descriptions directly into your project templates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const GITHUB_OWNER = 'TechInnocens'; // Replace with your GitHub username
+        const GITHUB_REPO = 'AISaE_Patterns'; // Replace with your repository name
+        const GITHUB_TOKEN = 'nope'; // Optional: GitHub token for authenticated requests
+        const ACCESS_CODE = 'aisae2024'; // Change this to your desired password
+
+        // Login handling
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const enteredCode = document.getElementById('access-code').value;
+            
+            if (enteredCode === ACCESS_CODE) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-interface').style.display = 'block';
+                
+                // Store login state in sessionStorage
+                sessionStorage.setItem('aisae_authenticated', 'true');
+            } else {
+                showAlert('login-alert', 'Invalid access code. Please try again.', 'error');
+                document.getElementById('access-code').value = '';
+            }
+        });
+
+        // Check if already authenticated
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('aisae_authenticated') === 'true') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-interface').style.display = 'block';
+            }
+        });
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content and mark tab as active
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Show alert message
+        function showAlert(elementId, message, type) {
+            const alert = document.getElementById(elementId);
+            alert.className = `alert ${type}`;
+            alert.textContent = message;
+            alert.style.display = 'block';
+        }
+
+        // Hide alert message
+        function hideAlert(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        // Show/hide loading spinner
+        function toggleLoading(elementId, show) {
+            document.getElementById(elementId).style.display = show ? 'flex' : 'none';
+        }
+
+        // Create GitHub issue
+        async function createGitHubIssue(title, body, labels = []) {
+            const headers = {
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            };
+            
+            if (GITHUB_TOKEN) {
+                headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+            }
+
+            const response = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/issues`, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({
+                    title: title,
+                    body: body,
+                    labels: labels
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+            }
+
+            return await response.json();
+        }
+
+        // Register project form handler
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const repoUrl = document.getElementById('repo-url').value.trim();
+            const contactEmail = document.getElementById('contact-email').value.trim();
+            
+            hideAlert('register-alert');
+            toggleLoading('register-loading', true);
+            
+            try {
+                const title = '[REGISTER] New AISaE Project Registration';
+                const body = `Repository URL: ${repoUrl}
+
+Contact Email: ${contactEmail || 'Not provided'}
+
+---
+Automated registration request from AISaE Project Management interface.`;
+
+                const issue = await createGitHubIssue(title, body, ['registration', 'automated']);
+                
+                showAlert('register-alert', 
+                    `Registration request submitted successfully! Issue #${issue.number} created. You will receive your Project ID when the registration is processed.`, 
+                    'success');
+                
+                // Clear form
+                document.getElementById('register-form').reset();
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                showAlert('register-alert', 
+                    `Registration failed: ${error.message}. Please try again or contact support.`, 
+                    'error');
+            } finally {
+                toggleLoading('register-loading', false);
+            }
+        });
+
+        // Update project form handler
+        document.getElementById('update-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const projectId = document.getElementById('project-id').value.trim();
+            const repoUrl = document.getElementById('update-repo-url').value.trim();
+            
+            hideAlert('update-alert');
+            toggleLoading('update-loading', true);
+            
+            try {
+                const title = '[UPDATE] AISaE Project Update Request';
+                const body = `Project ID: ${projectId}
+
+Repository URL: ${repoUrl}
+
+---
+Automated update request from AISaE Project Management interface.`;
+
+                const issue = await createGitHubIssue(title, body, ['update', 'automated']);
+                
+                showAlert('update-alert', 
+                    `Update request submitted successfully! Issue #${issue.number} created. Your project data will be refreshed shortly.`, 
+                    'success');
+                
+                // Clear form
+                document.getElementById('update-form').reset();
+                
+            } catch (error) {
+                console.error('Update error:', error);
+                showAlert('update-alert', 
+                    `Update failed: ${error.message}. Please check your Project ID and repository URL.`, 
+                    'error');
+            } finally {
+                toggleLoading('update-loading', false);
+            }
+        });
+
+        // Dashboard form handler
+        document.getElementById('dashboard-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const projectId = document.getElementById('dashboard-project-id').value.trim();
+            
+            hideAlert('dashboard-alert');
+            toggleLoading('dashboard-loading', true);
+            
+            try {
+                // Try to load project data from registry
+                const response = await fetch(`https://${GITHUB_OWNER}.github.io/${GITHUB_REPO}/registry/${projectId}.json`);
+                
+                if (!response.ok) {
+                    throw new Error('Project not found. Please check your Project ID.');
+                }
+                
+                const projectData = await response.json();
+                
+                // Update dashboard display
+                document.getElementById('project-name').textContent = projectData.name || 'Unknown Project';
+                document.getElementById('project-repo').textContent = projectData.repository_url || '';
+                document.getElementById('project-repo').href = projectData.repository_url || '';
+                
+                const healthScore = projectData.health_score || 0;
+                document.getElementById('health-score').textContent = healthScore;
+                
+                // Update status badge
+                const statusElement = document.getElementById('project-status');
+                const status = projectData.health_status || 'unknown';
+                statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+                statusElement.className = `status-badge status-${status}`;
+                
+                // Update last updated
+                const lastUpdated = projectData.last_updated || projectData.registered_at || 'Never';
+                document.getElementById('project-updated').textContent = new Date(lastUpdated).toLocaleString();
+                
+                // Update completion indicators
+                document.getElementById('classification-status').textContent = healthScore >= 30 ? '✅' : '❌';
+                document.getElementById('approach-status').textContent = healthScore >= 60 ? '✅' : '❌';
+                document.getElementById('risk-status').textContent = healthScore >= 100 ? '✅' : '❌';
+                
+                // Show project details
+                const detailsContent = document.getElementById('details-content');
+                detailsContent.innerHTML = `
+                    <p><strong>Project ID:</strong> ${projectData.id}</p>
+                    <p><strong>Files Found:</strong> ${projectData.files_found || 0}</p>
+                    <p><strong>Classification String:</strong> ${projectData.classification_string || 'Not set'}</p>
+                    <p><strong>Approach Number:</strong> ${projectData.approach_number || 'Not chosen'}</p>
+                `;
+                
+                // Show dashboard content
+                document.getElementById('dashboard-content').style.display = 'block';
+                
+                showAlert('dashboard-alert', 'Project data loaded successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Dashboard error:', error);
+                showAlert('dashboard-alert', 
+                    `Failed to load project data: ${error.message}`, 
+                    'error');
+                document.getElementById('dashboard-content').style.display = 'none';
+            } finally {
+                toggleLoading('dashboard-loading', false);
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('AISaE Project Management Interface loaded');
+            
+            // Check if we have URL parameters for auto-filling forms
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project_id');
+            const repoUrl = urlParams.get('repo_url');
+            
+            if (projectId) {
+                document.getElementById('project-id').value = projectId;
+                document.getElementById('dashboard-project-id').value = projectId;
+            }
+            
+            if (repoUrl) {
+                document.getElementById('repo-url').value = repoUrl;
+                document.getElementById('update-repo-url').value = repoUrl;
+            }
+        });
+    </script>
+</body>
+</html>

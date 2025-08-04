@@ -1,0 +1,313 @@
+# .github/workflows/register-project.yml
+name: Register AISSE Project
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  register-project:
+    if: contains(github.event.issue.title, '[REGISTER]')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install @octokit/rest uuid pg
+
+    - name: Create shared modules
+      run: |
+        mkdir -p shared
+        # Copy the module files - in practice these would be in your repo
+        cp .github/shared/template-parser.js shared/
+        cp .github/shared/database-operations.js shared/
+
+    - name: Extract repository URL from issue
+      id: extract-url
+      run: |
+        echo "Extracting repository URL from issue body"
+        
+        # Extract repository URL using multiple patterns
+        REPO_URL=$(echo "${{ github.event.issue.body }}" | grep -oP 'https://github\.com/[^\s\)\]\n]+' | head -1)
+        if [ -z "$REPO_URL" ]; then
+          REPO_URL=$(echo "${{ github.event.issue.body }}" | grep -oP 'Repository.*?(https://github\.com/[^\s\)\]\n]+)' | grep -oP 'https://github\.com/[^\s\)\]\n]+' | head -1)
+        fi
+        
+        echo "Extracted Repository URL: '$REPO_URL'"
+        
+        if [ -z "$REPO_URL" ]; then
+          echo "::error::No valid GitHub repository URL found in issue body"
+          exit 1
+        fi
+        
+        echo "repo_url=$REPO_URL" >> $GITHUB_OUTPUT
+
+    - name: Process registration
+      id: process-registration
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        REPO_URL: ${{ steps.extract-url.outputs.repo_url }}
+      run: |
+        node << 'EOF'
+        const TemplateParser = require('./shared/template-parser');
+        const DatabaseOperations = require('./shared/database-operations');
+        const { randomUUID } = require('crypto');
+        const fs = require('fs');
+
+        // In the register-project.yml workflow, update the Node.js script:
+
+        async function processRegistration() {
+          const repoUrl = process.env.REPO_URL;
+          const dbOps = new DatabaseOperations(process.env.DATABASE_URL);
+          const parser = new TemplateParser();
+
+          try {
+            console.log('🚀 Starting project registration process...');
+            console.log(`📂 Repository URL: ${repoUrl}`);
+    
+            // Check if project already exists
+            console.log('🔍 Checking if project already exists...');
+            const existingProject = await dbOps.checkProjectExists(repoUrl);
+            if (existingProject) {
+              console.log(`❌ Project already exists: ${existingProject.name} (ID: ${existingProject.id})`);
+              fs.appendFileSync(process.env.GITHUB_OUTPUT, `already_exists=true\n`);
+              fs.appendFileSync(process.env.GITHUB_OUTPUT, `existing_id=${existingProject.id}\n`);
+              fs.appendFileSync(process.env.GITHUB_OUTPUT, `existing_name=${existingProject.name}\n`);
+              return;
+            }
+            console.log('✅ No existing project found - proceeding with registration');
+
+            // Generate new project ID
+            const projectId = randomUUID();
+            console.log(`🆔 Generated project ID: ${projectId}`);
+
+            // Scrape template data
+            console.log('📄 Scraping template files...');
+            const scrapedData = await parser.scrapeAllTemplates(repoUrl);
+            console.log('📄 Template scraping completed');
+            console.log('📊 Scraped data summary:');
+            console.log(`  → Files found: [${scrapedData.files_found.join(', ')}]`);
+            console.log(`  → Project details: ${scrapedData.project_details ? 'Found' : 'Not found'}`);
+            console.log(`  → Prioritisation record: ${scrapedData.prioritisation_record ? 'Found' : 'Not found'}`);
+            console.log(`  → Risk management plan: ${scrapedData.risk_management_plan ? 'Found' : 'Not found'}`);
+            console.log(`  → Feature development plan: ${scrapedData.feature_development_plan ? 'Found' : 'Not found'}`);
+            console.log(`  → In-life monitoring plan: ${scrapedData.in_life_monitoring_plan ? 'Found' : 'Not found'}`);
+
+            // Calculate progress and health
+            console.log('🧮 Calculating progress and health metrics...');
+            const progressStage = parser.calculateProgressStage(scrapedData);
+            const healthScore = parser.calculateHealthScore(scrapedData);
+            const healthStatus = parser.getHealthStatus(healthScore);
+            console.log('🧮 Metrics calculation completed');
+
+            // Prepare project data
+            console.log('📋 Preparing project data for database insertion...');
+            const projectData = {
+              id: projectId,
+              name: scrapedData.project_details?.project_name || 'Unknown Project',
+              repository_url: repoUrl,
+              progress_stage: progressStage,
+              health_score: healthScore,
+              health_status: healthStatus,
+              files_found: scrapedData.files_found,
+              ...scrapedData
+            };
+            console.log('📋 Project data prepared');
+            console.log(`  → Final project name: "${projectData.name}"`);
+            console.log(`  → Final progress stage: "${projectData.progress_stage}"`);
+            console.log(`  → Final health score: ${projectData.health_score}`);
+            console.log(`  → Final health status: "${projectData.health_status}"`);
+
+            // Insert into database
+            console.log('💾 Starting database insertion...');
+            await dbOps.insertProject(projectData);
+
+            console.log(`🎉 Project registered successfully: ${projectData.name}`);
+            console.log(`📈 Progress: ${progressStage}, Health: ${healthScore}/100 (${healthStatus})`);
+
+            // Output results
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `success=true\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `project_id=${projectId}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `project_name=${projectData.name}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `health_score=${healthScore}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `health_status=${healthStatus}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `progress_stage=${progressStage}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `files_found=${scrapedData.files_found.join(',')}\n`);
+
+          } catch (error) {
+            console.error('💥 Registration failed:', error);
+            console.error('📍 Error stack:', error.stack);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `success=false\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `error=${error.message}\n`);
+            process.exit(1);
+          }
+        }
+
+        processRegistration();
+        EOF
+
+    - name: Comment if already exists
+      if: steps.process-registration.outputs.already_exists == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const existingId = '${{ steps.process-registration.outputs.existing_id }}';
+          const existingName = '${{ steps.process-registration.outputs.existing_name }}';
+          
+          const message = `
+          ❌ **Project Already Registered**
+          
+          This repository is already registered in the AISSE directory:
+          
+          **Project Name:** ${existingName}
+          **Project ID:** \`${existingId}\`
+          **Repository:** ${{ steps.extract-url.outputs.repo_url }}
+          
+          To update your project data, use the **[UPDATE]** issue template instead.
+          `;
+          
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: message
+          });
+          
+          await github.rest.issues.update({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'closed',
+            labels: ['registration-failed', 'already-exists']
+          });
+
+    - name: Comment on successful registration
+      if: steps.process-registration.outputs.success == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const projectId = '${{ steps.process-registration.outputs.project_id }}';
+          const projectName = '${{ steps.process-registration.outputs.project_name }}';
+          const healthScore = '${{ steps.process-registration.outputs.health_score }}';
+          const healthStatus = '${{ steps.process-registration.outputs.health_status }}';
+          const progressStage = '${{ steps.process-registration.outputs.progress_stage }}';
+          const filesFound = '${{ steps.process-registration.outputs.files_found }}';
+          
+          const healthEmoji = {
+            'Healthy': '🟢', 'Attention': '🟡', 'Critical': '🔴', 'Unknown': '⚪'
+          }[healthStatus] || '⚪';
+          
+          const stageEmoji = {
+            'registered': '1️⃣', 'researched': '2️⃣', 'prioritised': '3️⃣',
+            'developing': '4️⃣', 'tested': '5️⃣', 'in-life': '6️⃣'
+          }[progressStage] || '⚪';
+          
+          const message = `
+          ✅ **Project Registration Successful**
+          
+          **Project ID:** \`${projectId}\`
+          **Project Name:** ${projectName}
+          **Repository:** ${{ steps.extract-url.outputs.repo_url }}
+          **Progress Stage:** ${stageEmoji} ${progressStage}
+          **Health Status:** ${healthEmoji} ${healthScore}/100 (${healthStatus})
+          
+          **Template Files Found:** ${filesFound || 'none'}
+          
+          **Progress Stages:**
+          1️⃣ Registered - Project Details complete
+          2️⃣ Researched - Impact/Risk areas identified  
+          3️⃣ Prioritised - Priorities set, approach chosen
+          4️⃣ Developing - User stories/risks managed
+          5️⃣ Tested - Goals met, no red risks
+          6️⃣ In-Life - Monitoring active
+          
+          **Next Steps:**
+          - Complete template sections to improve your health score
+          - Use the [UPDATE] issue template when you make changes
+          - Visit the AISSE dashboard to track progress
+          
+          **Keep your Project ID safe:** \`${projectId}\`
+          `;
+          
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: message
+          });
+          
+          await github.rest.issues.update({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'closed',
+            labels: ['registered', 'aisae-project', `stage-${progressStage}`, `health-${healthStatus.toLowerCase()}`]
+          });
+
+    - name: Comment on failed registration
+      if: steps.process-registration.outputs.success == 'false'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const error = '${{ steps.process-registration.outputs.error }}';
+          
+          const message = `
+          ❌ **Project Registration Failed**
+          
+          **Error:** ${error}
+          
+          Please check that:
+          1. Your repository is public
+          2. You have an \`aisse_project_documents\` folder
+          3. Template files contain properly filled markers
+          4. Repository URL is correctly formatted
+          
+          For assistance, please update this issue with corrections.
+          `;
+          
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: message
+          });
+          
+          await github.rest.issues.addLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['registration-failed', 'needs-attention']
+          });
+
+    - name: Create registry entry
+      if: steps.process-registration.outputs.success == 'true'
+      run: |
+        mkdir -p registry
+        echo '{
+          "id": "${{ steps.process-registration.outputs.project_id }}",
+          "name": "${{ steps.process-registration.outputs.project_name }}",
+          "repository_url": "${{ steps.extract-url.outputs.repo_url }}",
+          "registered": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'",
+          "progress_stage": "${{ steps.process-registration.outputs.progress_stage }}",
+          "health_score": ${{ steps.process-registration.outputs.health_score }},
+          "health_status": "${{ steps.process-registration.outputs.health_status }}"
+        }' > "registry/${{ steps.process-registration.outputs.project_id }}.json"
+        
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add registry/
+        git commit -m "Register project: ${{ steps.process-registration.outputs.project_name }}"
+        git push

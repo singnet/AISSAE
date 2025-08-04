@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AI Ethics & Risk Workshop Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+    Chosen Palette: Calm Neutral
+    Application Structure Plan: The SPA uses a primary top navigation combined with a secondary sidebar navigation for nested topics (like Sense-Making variations). This creates a clear, hierarchical information architecture. Users select a high-level workshop, and the content dynamically updates in the main view. This prevents overwhelming the user with a long, single-document scroll and provides immediate access to the required playbook. The content itself is structured in a two-column layout—metadata on the left for a quick overview, and the detailed agenda on the right for in-depth guidance. This separation of "at-a-glance" info from "step-by-step" instructions is designed for optimal facilitator usability.
+    Visualisation & Content Choices: The source report is procedural, not quantitative, so data charts are not used. Instead, the focus is on clarifying structure and process. Each "Playset" is presented as an interactive card. Key metadata points (like Time, Attendees) are paired with icons for quick recognition. The "Plays Used" are styled as distinct tags to highlight the building blocks of each workshop. The core of the application is the dynamic display of structured text, powered by JavaScript, to present the right guide at the right time. This approach turns a static document into a focused, interactive tool.
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .nav-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-btn.active {
+            background-color: #0f766e; /* teal-700 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .sub-nav-btn.active {
+            background-color: #f0fdfa; /* teal-50 */
+            color: #0f766e; /* teal-700 */
+            font-weight: 600;
+            border-left-color: #0f766e;
+        }
+        .sub-nav-btn {
+            border-left: 4px solid transparent;
+        }
+        .wps-play-tag {
+            background-color: #e0f2fe; /* sky-100 */
+            color: #075985; /* sky-800 */
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .content-section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div id="app" class="min-h-screen">
+        
+        <header class="bg-white shadow-sm sticky top-0 z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <h1 class="text-2xl font-bold text-slate-900">AISSE Workshops Playbook</h1>
+                <p class="text-slate-500 text-sm mt-1">Workshop guidance using the Wicked Problem Solving (WPS) methodology.</p>
+            </div>
+            <nav id="main-nav" class="bg-slate-100 border-b border-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex space-x-2 py-2 overflow-x-auto">
+                        <button data-target="sense-making" class="nav-btn px-4 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-slate-200">Sense-Making</button>
+                        <button data-target="risk-threshold" class="nav-btn px-4 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-slate-200">Risk Thresholds</button>
+                        <button data-target="user-story" class="nav-btn px-4 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-slate-200">User Story Creation</button>
+                        <button data-target="risk-review" class="nav-btn px-4 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-slate-200">Risk Review</button>
+                        <button data-target="risk-update" class="nav-btn px-4 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-slate-200">Risk Update</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row md:space-x-8">
+                
+                <aside id="sub-nav-container" class="w-full md:w-1/4 lg:w-1/5 mb-8 md:mb-0 hidden">
+                    <h3 class="font-bold text-lg mb-4 text-slate-900">Approaches</h3>
+                    <div id="sub-nav" class="space-y-1">
+                    </div>
+                </aside>
+
+                <div id="content-container" class="w-full">
+                    
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        const playbooks = {
+            "sense-making-analytical": {
+                parent: "sense-making",
+                title: "Playset: Sense Making - Analytical Scoring",
+                objective: "To quantitatively score, prioritise, and validate a pre-defined list of risks and values.",
+                bestFor: "Teams that respond well to data and require a clear, prioritised list.",
+                wpsPlays: ["Post Up", "Cluster", "2x2 Matrix", "Vote", "Score"],
+                attendees: "Project Lead, Lead Developer, UX/UI Lead, Data Scientist, Product Manager, Governance/Risk SME.",
+                time: "90 Minutes",
+                materials: "Pre-defined list of risks and values, digital or physical whiteboard, sticky notes, voting dots.",
+                agenda: [
+                    { step: 1, title: "Intro & Framing (10 mins)", description: "Welcome attendees. State the objective: \"Today, we will use a series of plays to review, augment, and prioritise our project's values and risks.\"" },
+                    { step: 2, title: "Play: Post Up (15 mins)", description: "<b>Key Question:</b> \"What values or risks are missing from our current list?\" <br><b>Workspace:</b> A large open area on the whiteboard next to the pre-defined lists. <br><b>Tasks:</b> Ask attendees to silently write any missing values or risks on sticky notes (one idea per note) and post them in the workspace." },
+                    { step: 3, title: "Play: Cluster (15 mins)", description: "<b>Key Question:</b> \"How are these ideas related?\" <br><b>Workspace:</b> The area with all the posted notes. <br><b>Tasks:</b> The facilitator (or the group, silently) moves the sticky notes, grouping similar items together into thematic clusters. Briefly discuss and label the new clusters." },
+                    { step: 4, title: "Play: 2x2 Matrix & Vote (30 mins)", description: "<b>Key Question:</b> \"Which risks are most critical and which values are most important?\" <br><b>Workspace:</b> Draw a 2x2 Matrix. For risks, label the axes <b>Likelihood</b> (Low to High) and <b>Impact</b> (Low to High). For values, use <b>Relevance</b> and <b>Importance</b>. <br><b>Tasks:</b> Discuss each cluster of risks/values. Ask the team to <b>Vote</b> by placing the sticky notes (or dots representing them) onto the appropriate quadrant of the matrix. Facilitate a discussion on the items in the top-right quadrant (High/High)." },
+                    { step: 5, title: "Wrap-up & Next Steps (10 mins)", description: "Summarise the prioritised items from the top-right quadrant. Confirm this output will drive mitigation planning and feature development." }
+                ]
+            },
+            "sense-making-persona": {
+                parent: "sense-making",
+                title: "Playset: Sense Making - Persona/Scenario Approach",
+                objective: "To explore the practical implications of values and risks by role-playing.",
+                bestFor: "Human-centered design teams and bringing abstract risks to life.",
+                wpsPlays: ["Make a Scene", "Post Up"],
+                attendees: "Project Lead, UX/UI Lead, UX Researcher, Product Manager, Marketing/Comms Rep, Customer Support Rep.",
+                time: "2 hours",
+                materials: "3 distinct user personas, a pre-defined scenario for each, digital/physical whiteboard.",
+                agenda: [
+                    { step: 1, title: "Intro & Persona Review (15 mins)", description: "State the objective: \"We're going to use the <b>Make a Scene</b> play to step into our users' shoes and see how our project might play out in the real world.\" Introduce the personas." },
+                    { step: 2, title: "Play: Make a Scene (Breakout Session) (30 mins)", description: "<b>Key Question:</b> \"For Persona A in this scenario, which values are most critical and which risks are most likely to affect them?\" <br><b>Workspace:</b> A dedicated whiteboard area for each breakout team. <br><b>Tasks:</b> In small teams, sketch the scenario. Use a <b>Post Up</b> within the scene to add sticky notes answering the key question." },
+                    { step: 3, title: "Group Share-Back (15 mins)", description: "Each team shares its \"scene\" and key findings." },
+                    { step: 4, title: "Repeat for Personas B & C (45 mins)", description: "Repeat the <b>Make a Scene</b> play for the remaining personas." },
+                    { step: 5, title: "Synthesise & Conclude (15 mins)", description: "Review the findings across all personas. Ask: \"What new risks did we uncover? Which values proved most critical?\" Summarise the key takeaways." }
+                ]
+            },
+            "sense-making-discussion": {
+                parent: "sense-making",
+                title: "Playset: Sense Making - Discussion Approach",
+                objective: "To leverage collective expertise to critique and enhance the existing list of values and risks.",
+                bestFor: "Experienced, multi-disciplinary teams where qualitative insight is key.",
+                wpsPlays: ["Question Blitz", "Post Up"],
+                attendees: "A diverse mix of roles (dev, product, design, legal, policy, etc.).",
+                time: "75 Minutes",
+                materials: "List of values and risks, shared document or whiteboard.",
+                agenda: [
+                    { step: 1, title: "Intro & Ground Rules (10 mins)", description: "State the objective and set ground rules for a constructive discussion." },
+                    { step: 2, title: "Guided Review (45 mins)", description: "Go through the value and risk lists item by item. Use probing questions to drive discussion: \"How could this manifest? What are the root causes? Is this the right word?\"" },
+                    { step: 3, title: "Play: Question Blitz (15 mins)", description: "<b>Key Question:</b> \"What is the single biggest question or gap that is still on your mind?\" <br><b>Workspace:</b> An open area on the whiteboard. <br><b>Tasks:</b> Ask attendees to silently <b>Post Up</b> their final questions or concerns. Cluster and discuss these to identify any major gaps." },
+                    { step: 4, title: "Wrap-up (5 mins)", description: "The facilitator will synthesise the discussion and the Question Blitz output into an updated list." }
+                ]
+            },
+            "sense-making-stakeholder": {
+                parent: "sense-making",
+                title: "Playset: Sense Making - Stakeholder Input",
+                objective: "To gather direct feedback on risks and values from impacted stakeholder groups.",
+                bestFor: "Projects with significant public impact or requiring co-design.",
+                wpsPlays: ["Interview", "Post Up"],
+                attendees: "Facilitator, Project Lead, 3-5 stakeholder representatives.",
+                time: "90 Minutes",
+                materials: "Jargon-free project summary, whiteboard.",
+                agenda: [
+                    { step: 1, title: "Welcome & Context Setting (15 mins)", description: "Frame the session as an <b>Interview</b> to gather their expert insights. \"We're here to listen.\"" },
+                    { step: 2, title: "Play: Post Up (Hopes & Values) (25 mins)", description: "<b>Key Question:</b> \"What are your biggest <b>hopes</b> for a tool like this? What values must it uphold?\" <br><b>Workspace:</b> A whiteboard column labeled \"Hopes / Values.\" <br><b>Tasks:</b> Facilitate a discussion, capturing the key themes on sticky notes and posting them up." },
+                    { step: 3, title: "Play: Post Up (Fears & Concerns) (25 mins)", description: "<b>Key Question:</b> \"What are your biggest <b>fears or concerns</b>? What harms must we avoid?\" <br><b>Workspace:</b> A whiteboard column labeled \"Fears / Risks.\" <br><b>Tasks:</b> Capture key themes on sticky notes." },
+                    { step: 4, title: "Review & Clarification (15 mins)", description: "Read back the posted notes. Ask: \"Have we captured your points accurately?\"" },
+                    { step: 5, title: "Closing & Commitment (10 mins)", description: "Thank the stakeholders and explain how their input will be used." }
+                ]
+            },
+            "risk-threshold": {
+                parent: "risk-threshold",
+                title: "Playset: Risk Threshold Rating",
+                objective: "To collaboratively define the boundaries for Red, Amber, or Green risks.",
+                bestFor: "Establishing consistent risk categorisation.",
+                wpsPlays: ["Post Up", "Sort", "Decide"],
+                attendees: "Project Lead, Governance/Risk SME, Lead Developer, Product Manager.",
+                time: "60 Minutes",
+                materials: "Prioritised risk list, whiteboard.",
+                agenda: [
+                    { step: 1, title: "Intro & Objective (10 mins)", description: "State the goal: \"Today we will define and <b>Decide</b> on our RAG ratings for risks.\"" },
+                    { step: 2, title: "Play: Post Up (Anchor on Extremes) (20 mins)", description: "<b>Key Question:</b> \"What kind of impact is absolutely unacceptable (Red)? What impact is acceptable (Green)?\" <br><b>Workspace:</b> Two areas on the whiteboard labeled \"Red Criteria\" and \"Green Criteria.\" <br><b>Tasks:</b> Brainstorm and <b>Post Up</b> the criteria for each extreme." },
+                    { step: 3, title: "Define the Middle (15 mins)", description: "With the extremes defined, facilitate a discussion to define the \"Amber\" criteria that sits between them." },
+                    { step: 4, title: "Play: Sort (10 mins)", description: "<b>Key Question:</b> \"Using our new definitions, how would we categorise these risks?\" <br><b>Workspace:</b> A three-column layout for Red, Amber, Green. <br><b>Tasks:</b> Take 2-3 risks from your list and, as a group, <b>Sort</b> them into the appropriate RAG column. Discuss if the definitions are working." },
+                    { step: 5, title: "Wrap-up (5 mins)", description: "Finalise the definitions." }
+                ]
+            },
+            "user-story": {
+                parent: "user-story",
+                title: "Playset: User Stories for Benevolent Outcomes",
+                objective: "To reframe risks as opportunities for positive impact and create user stories.",
+                bestFor: "Proactively delivering value and building trust.",
+                wpsPlays: ["Post Up", "Ideaviz"],
+                attendees: "Product Manager, UX/UI Lead, Lead Developer, QA Lead, UX Writer.",
+                time: "2.5 Hours",
+                materials: "Prioritised risk register, user story template, whiteboard.",
+                agenda: [
+                    { step: 1, title: "Intro & The Mirror Concept (15 mins)", description: "Explain the objective of turning risks into positive opportunities." },
+                    { step: 2, title: "Select a High-Impact Risk (10 mins)", description: "Choose a significant risk from the register." },
+                    { step: 3, title: "Play: Ideaviz (The 'Mirror') (45 mins)", description: "<b>Key Question:</b> \"What is the positive inverse of this risk? What would an amazing, trust-building experience look like?\" <br><b>Workspace:</b> A simple T-chart. Left side: \"The Risk (Negative)\". Right side: \"The Opportunity (Positive)\". <br><b>Tasks:</b> First, write the \"negative\" user story on the left. Then, <b>Post Up</b> ideas for the positive \"mirror\" experience on the right." },
+                    { step: 4, title: "Craft 'Positive' User Stories (30 mins)", description: "Convert the best ideas from the right side of the T-chart into formal user stories." },
+                    { step: 5, title: "Repeat (45 mins)", description: "Repeat the <b>Ideaviz</b> play for 2-3 more high-priority risks." },
+                    { step: 6, title: "Wrap-up (5 mins)", description: "Review the new backlog of positive user stories." }
+                ]
+            },
+            "risk-review": {
+                parent: "risk-review",
+                title: "Playset: Risk Workshop",
+                objective: "To analyse high-priority risks, understand root causes, and assign an initial score.",
+                bestFor: "Deep-diving into specific, high-impact risks.",
+                wpsPlays: ["Root Cause", "Score"],
+                attendees: "Project Lead, Risk Owner, relevant SMEs.",
+                time: "30-45 minutes per risk",
+                materials: "Risk register, RAG definitions.",
+                agenda: [
+                    { step: 1, title: "State the Risk (2 mins)", description: "Announce the risk to be reviewed." },
+                    { step: 2, title: "Play: Root Cause (15 mins)", description: "<b>Key Question:</b> \"What are the underlying drivers or root causes of this risk?\" <br><b>Workspace:</b> A simple fishbone diagram (or just a list). <br><b>Tasks:</b> Ask the Risk Owner to describe the risk. Use the \"5 Whys\" technique to probe deeper and identify potential root causes." },
+                    { step: 3, title: "Play: Score (10 mins)", description: "<b>Key Question:</b> \"Based on our RAG definitions, what is the Impact and Likelihood score for this risk?\" <br><b>Tasks:</b> As a group, discuss and agree on an initial score (e.g., Impact: Red, Likelihood: Medium). Record the scores." },
+                    { step: 4, title: "Identify Controls & Ownership (8 mins)", description: "Use a quick <b>Post Up</b> to list existing controls. Confirm the Risk Owner and their next step (drafting mitigations)." }
+                ]
+            },
+            "risk-update": {
+                parent: "risk-update",
+                title: "Playset: Risk Stand-up",
+                objective: "For team members to provide status updates on risks and collectively review scores.",
+                bestFor: "A recurring (e.g., bi-weekly) meeting to maintain momentum.",
+                wpsPlays: ["Post Up", "Vote", "Score"],
+                attendees: "Full project team.",
+                time: "45-60 Minutes",
+                materials: "Live risk register displayed on a screen.",
+                agenda: [
+                    { step: 1, title: "Review New Risks (10 mins)", description: "Use a quick <b>Post Up</b> to add any new risks to the register. Assign owners." },
+                    { step: 2, title: "Round Robin Updates (25 mins)", description: "Go through high-priority risks. The Risk Owner provides a brief update." },
+                    { step: 3, title: "Play: Score/Vote (10 mins)", description: "<b>Key Question:</b> \"Based on the new information, should we change the score for this risk?\" <br><b>Tasks:</b> After an update, facilitate a quick discussion. If there's disagreement on a score change, use a quick <b>Vote</b> (e.g., thumbs up/down) to reach a decision." },
+                    { step: 4, title: "Wrap-up (5 mins)", description: "Summarise key decisions and score changes." }
+                ]
+            }
+        };
+
+        const senseMakingSubNav = [
+            { id: "sense-making-analytical", name: "Analytical" },
+            { id: "sense-making-persona", name: "Persona/Scenario" },
+            { id: "sense-making-discussion", name: "Discussion" },
+            { id: "sense-making-stakeholder", name: "Stakeholder" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainNav = document.getElementById('main-nav');
+            const subNavContainer = document.getElementById('sub-nav-container');
+            const subNav = document.getElementById('sub-nav');
+            const contentContainer = document.getElementById('content-container');
+            let activeMain = 'sense-making';
+            let activeSub = 'sense-making-analytical';
+
+            function renderPlaybook(id) {
+                const playbook = playbooks[id];
+                if (!playbook) {
+                    contentContainer.innerHTML = `<div class="p-8 text-center text-slate-500">Select a workshop to begin.</div>`;
+                    return;
+                }
+
+                const wpsPlaysHtml = playbook.wpsPlays.map(play => `<span class="wps-play-tag inline-block px-3 py-1 rounded-full">${play}</span>`).join('');
+                const agendaHtml = playbook.agenda.map(item => `
+                    <li class="flex space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-sm">${item.step}</div>
+                        <div class="flex-1 pb-6 border-l-2 border-slate-200 ml-4 pl-8">
+                            <h4 class="font-bold text-slate-800">${item.title}</h4>
+                            <p class="text-slate-600 mt-1 text-sm leading-relaxed">${item.description}</p>
+                        </div>
+                    </li>
+                `).join('');
+
+                contentContainer.innerHTML = `
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden content-section">
+                        <div class="p-6 sm:p-8">
+                            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-2">${playbook.title}</h2>
+                            <p class="text-slate-600 text-sm mb-6">${playbook.objective}</p>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                <div class="lg:col-span-1 space-y-4">
+                                    <div>
+                                        <h3 class="font-semibold text-slate-700 mb-2">Best For</h3>
+                                        <p class="text-sm text-slate-600">${playbook.bestFor}</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-slate-700 mb-2">Plays Used</h3>
+                                        <div class="flex flex-wrap gap-2">${wpsPlaysHtml}</div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-slate-700 mb-2">Details</h3>
+                                        <ul class="space-y-2 text-sm text-slate-600">
+                                            <li class="flex items-center"><span class="w-5 mr-2 text-teal-600">👤</span> ${playbook.attendees}</li>
+                                            <li class="flex items-center"><span class="w-5 mr-2 text-teal-600">⏱️</span> ${playbook.time}</li>
+                                            <li class="flex items-center"><span class="w-5 mr-2 text-teal-600">📋</span> ${playbook.materials}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-2">
+                                    <h3 class="font-semibold text-slate-700 mb-4">Agenda & Steps</h3>
+                                    <ul class="relative">${agendaHtml.replace(/<li class="flex space-x-4">(.*?)<\/li>([\s\S]*)/, '<li class="flex space-x-4">$1</li>$2'.replace('border-l-2 border-slate-200', ''))}</ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            function updateNavState() {
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.target === activeMain);
+                });
+
+                if (activeMain === 'sense-making') {
+                    subNavContainer.classList.remove('hidden');
+                    subNav.innerHTML = senseMakingSubNav.map(item => `
+                        <button data-target="${item.id}" class="sub-nav-btn w-full text-left px-4 py-2 rounded-r-md text-sm text-slate-600 hover:bg-slate-100">${item.name}</button>
+                    `).join('');
+                    document.querySelectorAll('.sub-nav-btn').forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.target === activeSub);
+                        btn.addEventListener('click', (e) => {
+                            activeSub = e.currentTarget.dataset.target;
+                            updateNavState();
+                            renderPlaybook(activeSub);
+                        });
+                    });
+                } else {
+                    subNavContainer.classList.add('hidden');
+                }
+            }
+
+            mainNav.addEventListener('click', (e) => {
+                if (e.target.classList.contains('nav-btn')) {
+                    const target = e.target.dataset.target;
+                    activeMain = target;
+                    if (target === 'sense-making') {
+                        activeSub = 'sense-making-analytical'; 
+                        renderPlaybook(activeSub);
+                    } else {
+                        renderPlaybook(target);
+                    }
+                    updateNavState();
+                }
+            });
+            
+            updateNavState();
+            renderPlaybook(activeSub);
+
+        });
+    </script>
+
+</body>
+</html>

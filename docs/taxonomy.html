@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Risk Taxonomy Explorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2B0572 0%, #250580 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            min-width: 250px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #2B0572;
+        }
+
+        .filter-select {
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            min-width: 150px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .filter-select:disabled {
+            background: #f8f9fa;
+            color: #6c757d;
+            border-color: #dee2e6;
+            cursor: not-allowed;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2B0572;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .tree-item {
+            margin-bottom: 8px;
+        }
+
+        .tree-node {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .tree-node:hover {
+            background: #f8f9fa;
+        }
+
+        .tree-node.active {
+            background: #2B0572;
+            color: white;
+        }
+
+        .tree-node.principle {
+            font-weight: bold;
+            background: #f1f3f5;
+            color: #495057;
+        }
+
+        .tree-node.principle.active {
+            background: #495057;
+            color: white;
+        }
+
+        .tree-node.domain {
+            margin-left: 20px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .tree-node.impact_area {
+            margin-left: 40px;
+            color: #888;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .impact_area-description {
+            font-style: italic;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            color: #999;
+            line-height: 1.4;
+        }
+
+        .expand-icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .risk-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2B0572;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.5s ease;
+        }
+
+        .risk-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Style for highlighting a risk card when selected from URL */
+        .risk-card.highlight {
+            background-color: #e9d5ff !important; /* Light purple highlight */
+            box-shadow: 0 8px 25px rgba(43, 5, 114, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .risk-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .risk-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .risk-meta-item {
+            margin-right: 15px;
+        }
+
+        .risk-description {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 10px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .risk-insight {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .risk-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-established { background: #d4edda; color: #155724; }
+        .badge-unsettled { background: #fff3cd; color: #856404; }
+        .badge-novel { background: #f8d7da; color: #721c24; }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #2B0572;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .data-source-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .export-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            min-width: 150px;
+        }
+
+        .export-btn:hover {
+            background: #218838;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-input, .filter-select {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Risk Taxonomy Explorer</h1>
+            <p>Explore AI risks organised by OECD principles, domains, and impact areas</p>
+        </div>
+
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search risks, descriptions, or impact areas...">
+                <select class="filter-select" id="principleFilter">
+                    <option value="">All OECD Principles</option>
+                </select>
+                <select class="filter-select" id="domainFilter">
+                    <option value="">All Domains</option>
+                </select>
+                <select class="filter-select" id="impactAreaFilter">
+                    <option value="">All Impact Areas</option>
+                </select>
+                <select class="filter-select" id="insightFilter">
+                    <option value="">All Insight Levels</option>
+                </select>
+                <div class="data-source-radio" style="display: flex; align-items: center; gap: 20px; padding: 12px 16px; border: 2px solid #e1e5e9; border-radius: 8px; background: white; min-width: 200px;">
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="radio" name="dataSource" value="csv" checked style="margin: 0;">
+                        <span>CSV</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="radio" name="dataSource" value="json" style="margin: 0;">
+                        <span>JSON</span>
+                    </label>
+                </div>
+                <button class="filter-select" id="reloadBtn" style="cursor: pointer; background: #2B0572; color: white; border: none;">Reload Data</button>
+                <button class="export-btn" id="exportBtn">Export Selected</button>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="principleCount">0</div>
+                    <div>OECD Principles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="domainCount">0</div>
+                    <div>Domains</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="impactAreaCount">0</div>
+                    <div>Impact Areas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalRisks">0</div>
+                    <div>Total Risks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="visibleRisks">0</div>
+                    <div>Risks Visible</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <h3 style="margin-bottom: 20px; color: #333;">Browse by Category</h3>
+                <div id="treeView"></div>
+            </div>
+            
+            <div class="main-content">
+                <div class="data-source-info" id="dataSourceInfo">Loading...</div>
+                <div class="breadcrumb" id="breadcrumb">All Risks</div>
+                <div id="riskDisplay"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let allRisks = [];
+    let filteredRisks = [];
+    let currentSelection = { principle: null, domain: null, impact_area: null };
+    let expandedNodes = new Set();
+    let impactAreaDescriptions = new Map();
+
+    // Parse CSV data
+    function parseCSV(csv) {
+        const lines = csv.trim().split('\n');
+        const headers = lines[0].split(',').map(h => h.trim());
+        
+        return lines.slice(1).map(line => {
+            const values = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    values.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            values.push(current.trim());
+            
+            const obj = {};
+            headers.forEach((header, index) => {
+                let value = values[index] || '';
+                if (value.startsWith('"') && value.endsWith('"') && value.length > 1) {
+                    value = value.slice(1, -1);
+                }
+                value = value.replace(/""/g, '"');
+                obj[header] = value;
+            });
+            return obj;
+        });
+    }
+
+    // Load data from selected source and handle URL parameters
+    async function loadData() {
+        const dataSource = document.querySelector('input[name="dataSource"]:checked').value;
+        const loadingMessage = document.getElementById('riskDisplay');
+        const dataSourceInfo = document.getElementById('dataSourceInfo');
+        const urlParams = new URLSearchParams(window.location.search);
+        const riskIdFromUrl = urlParams.get('id');
+        
+        try {
+            loadingMessage.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">Loading data...</div>';
+            dataSourceInfo.textContent = `Loading from ${dataSource.toUpperCase()}...`;
+            
+            if (dataSource === 'json') {
+                const response = await fetch('data/taxonomy.json');
+                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                const jsonData = await response.json();
+                
+                if (Array.isArray(jsonData)) {
+                    allRisks = jsonData;
+                } else if (jsonData.risks) {
+                    allRisks = jsonData.risks;
+                } else {
+                    throw new Error('Invalid JSON structure - expected array or object with "risks" property');
+                }
+                
+                dataSourceInfo.textContent = `JSON (${allRisks.length} risks)`;
+                console.log(`Loaded ${allRisks.length} risks from JSON`);
+            } else {
+                const response = await fetch('data/taxonomy.csv');
+                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                const csvText = await response.text();
+                allRisks = parseCSV(csvText);
+                dataSourceInfo.textContent = `CSV (${allRisks.length} risks)`;
+                console.log(`Loaded ${allRisks.length} risks from CSV`);
+            }
+
+            // Build impact area descriptions map
+            allRisks.forEach(risk => {
+                if (risk['impact_area'] && risk['impact_area_description']) {
+                    impactAreaDescriptions.set(risk['impact_area'], risk['impact_area_description']);
+                }
+            });
+
+            // Update stats
+            updateStats();
+            
+            // Check for URL parameter before initial render
+            const riskToSelect = riskIdFromUrl ? allRisks.find(r => r.id == riskIdFromUrl) : null;
+
+            if (riskToSelect) {
+                const { oecd_principle: principle, impact_domain: domain, impact_area: impactArea } = riskToSelect;
+                
+                // Pre-set the filter dropdowns' values
+                document.getElementById('principleFilter').value = principle || '';
+                document.getElementById('domainFilter').value = domain || '';
+                document.getElementById('impactAreaFilter').value = impactArea || '';
+                
+                // Pre-set the selection state for tree and breadcrumb
+                currentSelection = { principle, domain, impact_area: impactArea };
+                
+                // Pre-set the tree expansion state
+                expandedNodes.add(principle);
+                expandedNodes.add(`${principle}|${domain}`);
+            }
+            
+        } catch (error) {
+            console.error(`Error loading ${dataSource.toUpperCase()}:`, error);
+            loadingMessage.innerHTML = `<div style="text-align: center; padding: 40px; color: #e74c3c;">
+                <strong>Error loading data</strong><br>
+                ${error.message}
+                <br><br>
+                <button onclick="loadData()" style="padding: 8px 16px; background: #2B0572; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Try Again
+                </button>
+            </div>`;
+            dataSourceInfo.textContent = `Error loading ${dataSource.toUpperCase()}`;
+            return;
+        }
+        
+        // This function will now use the pre-configured state if an ID was in the URL
+        applyFilters();
+
+        // After the UI has been updated, scroll to and highlight the specific risk card.
+        if (riskIdFromUrl) {
+            setTimeout(() => {
+                const riskCard = document.getElementById(`risk-${riskIdFromUrl}`);
+                if (riskCard) {
+                    riskCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    riskCard.classList.add('highlight');
+                    setTimeout(() => {
+                        riskCard.classList.remove('highlight');
+                    }, 2500);
+                } else {
+                    console.warn(`Could not find risk card with ID risk-${riskIdFromUrl} to highlight.`);
+                }
+            }, 200);
+        }
+    }
+
+
+    // Update statistics
+    function updateStats() {
+        document.getElementById('totalRisks').textContent = allRisks.length;
+        
+        const principles = [...new Set(allRisks.map(r => r['oecd_principle']))].filter(p => p);
+        const domains = [...new Set(allRisks.map(r => r['impact_domain']))].filter(d => d);
+        const impact_areas = [...new Set(allRisks.map(r => r['impact_area']))].filter(f => f);
+        
+        document.getElementById('principleCount').textContent = principles.length;
+        document.getElementById('domainCount').textContent = domains.length;
+        document.getElementById('impactAreaCount').textContent = impact_areas.length;
+    }
+
+    // Get currently filtered dataset based on current filter selections
+    function getCurrentlyFilteredRisks() {
+        const principleFilter = document.getElementById('principleFilter').value;
+        const domainFilter = document.getElementById('domainFilter').value;
+        const impactAreaFilter = document.getElementById('impactAreaFilter').value;
+        const insightFilter = document.getElementById('insightFilter').value;
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        
+        return allRisks.filter(risk => {
+            const matchesSearch = !searchTerm || 
+                (risk['risk_name'] && risk['risk_name'].toLowerCase().includes(searchTerm)) ||
+                (risk['impact_area'] && risk['impact_area'].toLowerCase().includes(searchTerm)) ||
+                (risk['impact_area_description'] && risk['impact_area_description'].toLowerCase().includes(searchTerm)) ||
+                (risk['risk_description'] && risk['risk_description'].toLowerCase().includes(searchTerm)) ||
+                (risk['impact_domain'] && risk['impact_domain'].toLowerCase().includes(searchTerm)) ||
+                (risk['oecd_principle'] && risk['oecd_principle'].toLowerCase().includes(searchTerm));
+            
+            const matchesPrinciple = !principleFilter || risk['oecd_principle'] === principleFilter;
+            const matchesDomain = !domainFilter || risk['impact_domain'] === domainFilter;
+            const matchesImpactArea = !impactAreaFilter || risk['impact_area'] === impactAreaFilter;
+            const matchesInsight = !insightFilter || risk['suggested_insight'] === insightFilter;
+            
+            return matchesSearch && matchesPrinciple && matchesDomain && matchesImpactArea && matchesInsight;
+        });
+    }
+
+    // Setup all filter dropdowns with full data initially
+    function setupFilters() {
+        updateAllFilterOptions();
+    }
+
+    // Update all filter dropdown options based on current selections
+    function updateAllFilterOptions() {
+        const principleFilter = document.getElementById('principleFilter');
+        const domainFilter = document.getElementById('domainFilter');
+        const impactAreaFilter = document.getElementById('impactAreaFilter');
+        const insightFilter = document.getElementById('insightFilter');
+        
+        const selectedPrinciple = principleFilter.value;
+        const selectedDomain = domainFilter.value;
+        const selectedImpactArea = impactAreaFilter.value;
+        const selectedInsight = insightFilter.value;
+        
+        const availableForPrinciples = allRisks.filter(risk => {
+            const matchesDomain = !selectedDomain || risk['impact_domain'] === selectedDomain;
+            const matchesImpactArea = !selectedImpactArea || risk['impact_area'] === selectedImpactArea;
+            const matchesInsight = !selectedInsight || risk['suggested_insight'] === selectedInsight;
+            return matchesDomain && matchesImpactArea && matchesInsight;
+        });
+        
+        const availableForDomains = allRisks.filter(risk => {
+            const matchesPrinciple = !selectedPrinciple || risk['oecd_principle'] === selectedPrinciple;
+            const matchesImpactArea = !selectedImpactArea || risk['impact_area'] === selectedImpactArea;
+            const matchesInsight = !selectedInsight || risk['suggested_insight'] === selectedInsight;
+            return matchesPrinciple && matchesImpactArea && matchesInsight;
+        });
+        
+        const availableForImpactAreas = allRisks.filter(risk => {
+            const matchesPrinciple = !selectedPrinciple || risk['oecd_principle'] === selectedPrinciple;
+            const matchesDomain = !selectedDomain || risk['impact_domain'] === selectedDomain;
+            const matchesInsight = !selectedInsight || risk['suggested_insight'] === selectedInsight;
+            return matchesPrinciple && matchesDomain && matchesInsight;
+        });
+        
+        const availableForInsights = allRisks.filter(risk => {
+            const matchesPrinciple = !selectedPrinciple || risk['oecd_principle'] === selectedPrinciple;
+            const matchesDomain = !selectedDomain || risk['impact_domain'] === selectedDomain;
+            const matchesImpactArea = !selectedImpactArea || risk['impact_area'] === selectedImpactArea;
+            return matchesPrinciple && matchesDomain && matchesImpactArea;
+        });
+        
+        const principles = [...new Set(availableForPrinciples.map(r => r['oecd_principle']))].filter(p => p).sort();
+        updateSelectOptions(principleFilter, principles, 'All OECD Principles', selectedPrinciple);
+        
+        const domains = [...new Set(availableForDomains.map(r => r['impact_domain']))].filter(d => d).sort();
+        updateSelectOptions(domainFilter, domains, 'All Domains', selectedDomain);
+        
+        const impact_areas = [...new Set(availableForImpactAreas.map(r => r['impact_area']))].filter(f => f).sort();
+        updateSelectOptions(impactAreaFilter, impact_areas, 'All Impact Areas', selectedImpactArea);
+        
+        const insights = [...new Set(availableForInsights.map(r => r['suggested_insight']))].filter(i => i).sort();
+        updateSelectOptions(insightFilter, insights, 'All Insight Levels', selectedInsight);
+        
+        domainFilter.disabled = false;
+        impactAreaFilter.disabled = false;
+    }
+    
+    function updateSelectOptions(selectElement, options, defaultText, selectedValue) {
+        selectElement.innerHTML = `<option value="">${defaultText}</option>`;
+        
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            if (option === selectedValue) {
+                optionElement.selected = true;
+            }
+            selectElement.appendChild(optionElement);
+        });
+        
+        if (selectedValue && !options.includes(selectedValue)) {
+            selectElement.value = '';
+        }
+    }
+
+    function buildTreeView() {
+        const treeView = document.getElementById('treeView');
+        treeView.innerHTML = '';
+        
+        const selectedPrinciple = document.getElementById('principleFilter').value;
+        const selectedDomain = document.getElementById('domainFilter').value;
+        const selectedImpactArea = document.getElementById('impactAreaFilter').value;
+        
+        const currentFilteredRisks = getCurrentlyFilteredRisks();
+        
+        const availablePrinciples = [...new Set(currentFilteredRisks.map(r => r['oecd_principle']))].filter(p => p).sort();
+        
+        const shouldAutoExpand = selectedPrinciple || selectedDomain || selectedImpactArea || availablePrinciples.length === 1;
+        
+        availablePrinciples.forEach(principle => {
+            const shouldExpandPrinciple = shouldAutoExpand && (selectedPrinciple === principle || !selectedPrinciple || availablePrinciples.length === 1);
+            
+            if (shouldExpandPrinciple && !expandedNodes.has(principle)) {
+                expandedNodes.add(principle);
+            }
+            
+            const isActivePrinciple = currentSelection.principle === principle;
+            const principleEl = createTreeNode(principle, 'principle', () => {
+                toggleExpanded(principle);
+                selectPrinciple(principle);
+            }, null, isActivePrinciple);
+            treeView.appendChild(principleEl);
+            
+            if (expandedNodes.has(principle)) {
+                const availableDomains = [...new Set(currentFilteredRisks
+                    .filter(r => r['oecd_principle'] === principle)
+                    .map(r => r['impact_domain']))].filter(d => d).sort();
+                
+                availableDomains.forEach(domain => {
+                    const shouldExpandDomain = shouldAutoExpand && (selectedDomain === domain || (!selectedDomain && availableDomains.length === 1));
+                    
+                    if (shouldExpandDomain && !expandedNodes.has(`${principle}|${domain}`)) {
+                        expandedNodes.add(`${principle}|${domain}`);
+                    }
+                    
+                    const isActiveDomain = currentSelection.principle === principle && currentSelection.domain === domain;
+                    const domainEl = createTreeNode(domain, 'domain', () => {
+                        toggleExpanded(`${principle}|${domain}`);
+                        selectDomain(principle, domain);
+                    }, null, isActiveDomain);
+                    treeView.appendChild(domainEl);
+                    
+                    if (expandedNodes.has(`${principle}|${domain}`)) {
+                        const availableImpactAreas = [...new Set(currentFilteredRisks
+                            .filter(r => r['oecd_principle'] === principle && r['impact_domain'] === domain)
+                            .map(r => r['impact_area']))].filter(f => f).sort();
+                        
+                        availableImpactAreas.forEach(impact_area => {
+                            const isActiveImpactArea = currentSelection.principle === principle && 
+                                                        currentSelection.domain === domain && 
+                                                        currentSelection.impact_area === impact_area;
+                            const impactAreaEl = createTreeNode(impact_area, 'impact_area', () => {
+                                selectImpactArea(principle, domain, impact_area);
+                            }, impactAreaDescriptions.get(impact_area), isActiveImpactArea);
+                            treeView.appendChild(impactAreaEl);
+                        });
+                    }
+                });
+            }
+        });
+        
+        if (currentFilteredRisks.length === 0) {
+            const noResultsEl = document.createElement('div');
+            noResultsEl.style.padding = '20px';
+            noResultsEl.style.textAlign = 'center';
+            noResultsEl.style.color = '#666';
+            noResultsEl.style.fontStyle = 'italic';
+            noResultsEl.textContent = 'No categories available with current filters';
+            treeView.appendChild(noResultsEl);
+        }
+    }
+
+    function createTreeNode(text, level, onClick, description, isActive = false) {
+        const div = document.createElement('div');
+        div.className = 'tree-item';
+        
+        const node = document.createElement('div');
+        node.className = `tree-node ${level}`;
+        if (isActive) {
+            node.classList.add('active');
+        }
+        node.onclick = onClick;
+        
+        if (level === 'principle' || level === 'domain') {
+            const icon = document.createElement('span');
+            icon.innerHTML = '▶';
+            icon.className = 'expand-icon';
+            node.appendChild(icon);
+        }
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.style.flex = '1';
+        
+        const textSpan = document.createElement('span');
+        textSpan.textContent = text;
+        contentDiv.appendChild(textSpan);
+        
+        if (level === 'impact_area' && description) {
+            const descDiv = document.createElement('div');
+            descDiv.className = 'impact_area-description';
+            descDiv.textContent = description;
+            contentDiv.appendChild(descDiv);
+        }
+        
+        node.appendChild(contentDiv);
+        div.appendChild(node);
+        return div;
+    }
+
+    function toggleExpanded(key) {
+        if (expandedNodes.has(key)) {
+            expandedNodes.delete(key);
+        } else {
+            expandedNodes.add(key);
+        }
+        buildTreeView();
+    }
+
+    function selectPrinciple(principle) {
+        currentSelection = { principle, domain: null, impact_area: null };
+        updateBreadcrumb();
+        displayRisks();
+    }
+
+    function selectDomain(principle, domain) {
+        currentSelection = { principle, domain, impact_area: null };
+        updateBreadcrumb();
+        displayRisks();
+    }
+
+    function selectImpactArea(principle, domain, impact_area) {
+        currentSelection = { principle, domain, impact_area };
+        updateBreadcrumb();
+        displayRisks();
+    }
+
+    function clearSelection() {
+        currentSelection = { principle: null, domain: null, impact_area: null };
+        updateBreadcrumb();
+        displayRisks();
+    }
+
+    function updateBreadcrumb() {
+        const breadcrumb = document.getElementById('breadcrumb');
+        const parts = [];
+        
+        parts.push('<a href="#" onclick="event.preventDefault(); clearSelection()">All Risks</a>');
+        
+        if (currentSelection.principle) {
+            parts.push(`<a href="#" onclick="event.preventDefault(); selectPrinciple('${escapeQuotes(currentSelection.principle)}')">${currentSelection.principle}</a>`);
+        }
+        if (currentSelection.domain) {
+            parts.push(`<a href="#" onclick="event.preventDefault(); selectDomain('${escapeQuotes(currentSelection.principle)}', '${escapeQuotes(currentSelection.domain)}')">${currentSelection.domain}</a>`);
+        }
+        if (currentSelection.impact_area) {
+            parts.push(currentSelection.impact_area);
+        }
+        
+        breadcrumb.innerHTML = parts.join(' > ');
+    }
+
+    function escapeQuotes(str) {
+        if (!str) return '';
+        return str.replace(/'/g, "\\'");
+    }
+
+    function displayRisks() {
+        const riskDisplay = document.getElementById('riskDisplay');
+        
+        let risks = filteredRisks;
+        
+        if (currentSelection.principle) {
+            risks = risks.filter(r => r['oecd_principle'] === currentSelection.principle);
+        }
+        if (currentSelection.domain) {
+            risks = risks.filter(r => r['impact_domain'] === currentSelection.domain);
+        }
+        if (currentSelection.impact_area) {
+            risks = risks.filter(r => r['impact_area'] === currentSelection.impact_area);
+        }
+        
+        document.getElementById('visibleRisks').textContent = risks.length;
+        
+        if (risks.length === 0) {
+            riskDisplay.innerHTML = '<div class="no-results">No risks found matching your criteria.</div>';
+            return;
+        }
+        
+        riskDisplay.innerHTML = risks.map(risk => `
+            <div class="risk-card" id="risk-${risk['id']}">
+                <div class="risk-title">${risk['risk_name'] || 'No specific risk stated'}</div>
+                ${risk['risk_description'] ? `<div class="risk-description">${risk['risk_description']}</div>` : ''}
+                <div class="risk-meta">
+                    <span class="risk-meta-item" style="font-size: 0.85rem;">OECD Principle: ${risk['oecd_principle'] || 'Unknown'}</span><br>
+                    <span class="risk-meta-item" style="font-size: 0.85rem;">Domain: ${risk['impact_domain'] || 'Unknown'}</span><br>
+                    <span class="risk-meta-item" style="font-size: 0.85rem;">Impact Area: ${risk['impact_area'] || 'Unknown'}</span>
+                </div>
+                <div class="risk-insight">
+                    <strong>Risk is thought to be:</strong> 
+                    <span class="risk-badge badge-${(risk['suggested_insight'] || 'unknown').toLowerCase()}">${risk['suggested_insight'] || 'Unknown'}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function exportRisks() {
+        let risks = filteredRisks;
+        
+        if (currentSelection.principle) {
+            risks = risks.filter(r => r['oecd_principle'] === currentSelection.principle);
+        }
+        if (currentSelection.domain) {
+            risks = risks.filter(r => r['impact_domain'] === currentSelection.domain);
+        }
+        if (currentSelection.impact_area) {
+            risks = risks.filter(r => r['impact_area'] === currentSelection.impact_area);
+        }
+
+        if (risks.length === 0) {
+            // Use a custom modal or message instead of alert
+            alert('No risks to export');
+            return;
+        }
+
+        const headers = ['id', 'oecd_principle', 'impact_domain', 'impact_area', 'impact_area_description', 'risk_name', 'risk_description', 'suggested_insight'];
+        const csvContent = [
+            headers.join(','),
+            ...risks.map(risk => headers.map(header => `"${(risk[header] || '').replace(/"/g, '""')}"`).join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `aisae_risks_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }
+
+    function applyFilters() {
+                // Synchronize currentSelection with the state of the filter dropdowns
+        currentSelection = {
+            principle: document.getElementById('principleFilter').value || null,
+            domain: document.getElementById('domainFilter').value || null,
+            impact_area: document.getElementById('impactAreaFilter').value || null
+        };
+        filteredRisks = getCurrentlyFilteredRisks();
+        updateAllFilterOptions();
+        buildTreeView();
+        updateBreadcrumb(); // Update breadcrumb based on current selection
+        displayRisks();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    document.getElementById('principleFilter').addEventListener('change', applyFilters);
+    document.getElementById('domainFilter').addEventListener('change', applyFilters);
+    document.getElementById('impactAreaFilter').addEventListener('change', applyFilters);
+    document.getElementById('insightFilter').addEventListener('change', applyFilters);
+    document.getElementById('reloadBtn').addEventListener('click', () => {
+        // Clear URL parameters before reloading
+        window.history.pushState({}, document.title, window.location.pathname);
+        loadData();
+    });
+    document.getElementById('exportBtn').addEventListener('click', exportRisks);
+    document.querySelectorAll('input[name="dataSource"]').forEach(radio => {
+        radio.addEventListener('change', loadData);
+    });
+
+    loadData();
+</script>
+</body>
+</html>

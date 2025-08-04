@@ -1,0 +1,281 @@
+# .github/workflows/update-project.yml
+name: Update AISSE Project
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  update-project:
+    if: contains(github.event.issue.title, '[UPDATE]')
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install @octokit/rest uuid pg
+
+    - name: Create shared modules
+      run: |
+        mkdir -p shared
+        # Copy the module files - in practice these would be in your repo
+        cp .github/shared/template-parser.js shared/
+        cp .github/shared/database-operations.js shared/
+
+    - name: Extract project info from issue
+      id: extract-info
+      run: |
+        echo "Extracting project information from issue body"
+        
+        # Extract Project ID
+        PROJECT_ID=$(echo "${{ github.event.issue.body }}" | grep -oP '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}' | head -1)
+        if [ -z "$PROJECT_ID" ]; then
+          PROJECT_ID=$(echo "${{ github.event.issue.body }}" | grep -oP '`[a-f0-9-]{36}`' | tr -d '`' | head -1)
+        fi
+        
+        # Extract Repository URL
+        REPO_URL=$(echo "${{ github.event.issue.body }}" | grep -oP 'https://github\.com/[^\s\)\]\n]+' | head -1)
+        if [ -z "$REPO_URL" ]; then
+          REPO_URL=$(echo "${{ github.event.issue.body }}" | grep -oP 'Repository.*?(https://github\.com/[^\s\)\]\n]+)' | grep -oP 'https://github\.com/[^\s\)\]\n]+' | head -1)
+        fi
+        
+        echo "Extracted Project ID: '$PROJECT_ID'"
+        echo "Extracted Repository URL: '$REPO_URL'"
+        
+        if [ -z "$PROJECT_ID" ]; then
+          echo "::error::No valid Project ID found"
+          exit 1
+        fi
+        
+        if [ -z "$REPO_URL" ]; then
+          echo "::error::No valid repository URL found"
+          exit 1
+        fi
+        
+        echo "project_id=$PROJECT_ID" >> $GITHUB_OUTPUT
+        echo "repo_url=$REPO_URL" >> $GITHUB_OUTPUT
+
+    - name: Process update
+      id: process-update
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        PROJECT_ID: ${{ steps.extract-info.outputs.project_id }}
+        REPO_URL: ${{ steps.extract-info.outputs.repo_url }}
+      run: |
+        node << 'EOF'
+        const TemplateParser = require('./shared/template-parser');
+        const DatabaseOperations = require('./shared/database-operations');
+        const fs = require('fs');
+
+        async function processUpdate() {
+          const projectId = process.env.PROJECT_ID;
+          const repoUrl = process.env.REPO_URL;
+          const dbOps = new DatabaseOperations(process.env.DATABASE_URL);
+          const parser = new TemplateParser();
+
+          try {
+            // Verify project exists and URL matches
+            const verification = await dbOps.verifyProject(projectId, repoUrl);
+            if (!verification.exists) {
+              console.log(`Project verification failed: ${verification.error}`);
+              fs.appendFileSync(process.env.GITHUB_OUTPUT, `success=false\n`);
+              fs.appendFileSync(process.env.GITHUB_OUTPUT, `error=${verification.error}\n`);
+              return;
+            }
+
+            const existingProject = verification.project;
+            console.log(`Updating project: ${existingProject.name}`);
+
+            // Scrape updated template data
+            console.log('Scraping template files for updates...');
+            const scrapedData = await parser.scrapeAllTemplates(repoUrl);
+
+            // Calculate updated progress and health
+            const progressStage = parser.calculateProgressStage(scrapedData);
+            const healthScore = parser.calculateHealthScore(scrapedData);
+            const hasRedRisks = scrapedData.risk_management_plan?.development_risks?.some(r => 
+              (r['Risk Zone'] || r['Zone'] || '').toLowerCase().includes('red')) || false;
+            const healthStatus = parser.getHealthStatus(healthScore, hasRedRisks);
+
+            // Prepare updated project data
+            const projectData = {
+              id: projectId,
+              name: scrapedData.project_details?.project_name || existingProject.name,
+              repository_url: repoUrl,
+              progress_stage: progressStage,
+              health_score: healthScore,
+              health_status: healthStatus,
+              files_found: scrapedData.files_found,
+              ...scrapedData
+            };
+
+            // Update database
+            await dbOps.updateProject(projectId, projectData);
+
+            console.log(`Project updated successfully: ${projectData.name}`);
+            console.log(`Progress: ${progressStage}, Health: ${healthScore}/100 (${healthStatus})`);
+
+            // Output results
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `success=true\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `project_name=${projectData.name}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `health_score=${healthScore}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `health_status=${healthStatus}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `progress_stage=${progressStage}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `files_found=${scrapedData.files_found.join(',')}\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `has_red_risks=${hasRedRisks}\n`);
+
+          } catch (error) {
+            console.error('Update failed:', error);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `success=false\n`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `error=${error.message}\n`);
+          }
+        }
+
+        processUpdate();
+        EOF
+
+    - name: Comment on successful update
+      if: steps.process-update.outputs.success == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const projectId = '${{ steps.extract-info.outputs.project_id }}';
+          const projectName = '${{ steps.process-update.outputs.project_name }}';
+          const healthScore = '${{ steps.process-update.outputs.health_score }}';
+          const healthStatus = '${{ steps.process-update.outputs.health_status }}';
+          const progressStage = '${{ steps.process-update.outputs.progress_stage }}';
+          const filesFound = '${{ steps.process-update.outputs.files_found }}';
+          const hasRedRisks = '${{ steps.process-update.outputs.has_red_risks }}' === 'true';
+          
+          const healthEmoji = {
+            'Healthy': '🟢', 'Attention': '🟡', 'Critical': '🔴', 'Unknown': '⚪'
+          }[healthStatus] || '⚪';
+          
+          const stageEmoji = {
+            'registered': '1️⃣', 'researched': '2️⃣', 'prioritised': '3️⃣',
+            'developing': '4️⃣', 'tested': '5️⃣', 'in-life': '6️⃣'
+          }[progressStage] || '⚪';
+          
+          const nextSteps = {
+            'in-life': '🎉 Congratulations! Your project is fully operational with monitoring in place.',
+            'tested': '🎯 Almost there! Set up your in-life monitoring plan to complete the framework.',
+            'developing': hasRedRisks ? '⚠️ Address red risks to advance to tested stage.' : '📝 Continue development work.',
+            'prioritised': '📋 Create your user stories and start risk reviews.',
+            'researched': '🎯 Complete prioritisation of your impact and risk areas.',
+            'registered': '📋 Add impact/risk areas to advance to researched stage.'
+          }[progressStage] || '📋 Complete your project classification.';
+          
+          const message = `
+          ✅ **Project Update Successful**
+          
+          **Project ID:** \`${projectId}\`
+          **Project Name:** ${projectName}
+          **Repository:** ${{ steps.extract-info.outputs.repo_url }}
+          **Progress Stage:** ${stageEmoji} ${progressStage}
+          **Health Status:** ${healthEmoji} ${healthScore}/100 (${healthStatus})
+          
+          **Template Files Processed:** ${filesFound || 'none'}
+          ${hasRedRisks ? '\n⚠️ **Red risks detected** - Address these to improve health status.' : ''}
+          
+          **Progress Stages:**
+          1️⃣ Registered - Project Details complete
+          2️⃣ Researched - Impact/Risk areas identified  
+          3️⃣ Prioritised - Priorities set, approach chosen
+          4️⃣ Developing - User stories/risks managed
+          5️⃣ Tested - Goals met, no red risks
+          6️⃣ In-Life - Monitoring active
+          
+          **Next Steps:**
+          ${nextSteps}
+          
+          - Visit the AISSE dashboard to see your updated status
+          - Use this UPDATE workflow whenever you change templates
+          `;
+          
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: message
+          });
+          
+          await github.rest.issues.update({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'closed',
+            labels: ['updated', 'aisae-project', `stage-${progressStage}`, `health-${healthStatus.toLowerCase()}`]
+          });
+
+    - name: Comment on failed update
+      if: steps.process-update.outputs.success == 'false'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const projectId = '${{ steps.extract-info.outputs.project_id }}';
+          const error = '${{ steps.process-update.outputs.error }}';
+          
+          const message = `
+          ❌ **Project Update Failed**
+          
+          **Project ID:** \`${projectId}\`
+          **Repository:** ${{ steps.extract-info.outputs.repo_url }}
+          **Error:** ${error}
+          
+          Please check that:
+          1. Your Project ID is correct
+          2. Repository URL matches your registration
+          3. Repository is public and accessible
+          4. Template files contain properly filled markers
+          5. Table data follows the expected format
+          
+          If you continue to have issues, please contact the maintainers.
+          `;
+          
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: message
+          });
+          
+          await github.rest.issues.addLabels({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['update-failed', 'needs-attention']
+          });
+
+    - name: Update registry entry
+      if: steps.process-update.outputs.success == 'true'
+      run: |
+        mkdir -p registry
+        echo '{
+          "id": "${{ steps.extract-info.outputs.project_id }}",
+          "name": "${{ steps.process-update.outputs.project_name }}",
+          "repository_url": "${{ steps.extract-info.outputs.repo_url }}",
+          "last_updated": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'",
+          "progress_stage": "${{ steps.process-update.outputs.progress_stage }}",
+          "health_score": ${{ steps.process-update.outputs.health_score }},
+          "health_status": "${{ steps.process-update.outputs.health_status }}",
+          "files_processed": "${{ steps.process-update.outputs.files_found }}"
+        }' > "registry/${{ steps.extract-info.outputs.project_id }}.json"
+        
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add registry/
+        git commit -m "Update project: ${{ steps.process-update.outputs.project_name }}"
+        git push

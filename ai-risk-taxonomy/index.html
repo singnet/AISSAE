@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Risk Taxonomy Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            min-width: 250px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .filter-select {
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            min-width: 150px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .tree-item {
+            margin-bottom: 8px;
+        }
+
+        .tree-node {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tree-node:hover {
+            background: #f8f9fa;
+        }
+
+        .tree-node.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tree-node.principle {
+            font-weight: bold;
+            background: #f1f3f5;
+            color: #495057;
+        }
+
+        .tree-node.principle.active {
+            background: #495057;
+            color: white;
+        }
+
+        .tree-node.domain {
+            margin-left: 20px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .tree-node.facet {
+            margin-left: 40px;
+            color: #888;
+        }
+
+        .expand-icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .risk-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .risk-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .risk-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .risk-description {
+            color: #666;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .risk-content {
+            color: #444;
+            margin-bottom: 12px;
+        }
+
+        .risk-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            flex-wrap: wrap;
+        }
+
+        .risk-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-known { background: #d4edda; color: #155724; }
+        .badge-foreseeable { background: #fff3cd; color: #856404; }
+        .badge-emergent { background: #f8d7da; color: #721c24; }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .data-source-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .search-input, .filter-select {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Risk Taxonomy Explorer</h1>
+            <p>Explore AI risks organised by OECD principles, domains, and neutral facets</p>
+        </div>
+
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search risks, facets, or descriptions...">
+                <select class="filter-select" id="principleFilter">
+                    <option value="">All OECD Principles</option>
+                </select>
+                <select class="filter-select" id="insightFilter">
+                    <option value="">All Insight Levels</option>
+                </select>
+                <select class="filter-select" id="dataSourceSelect">
+                    <option value="csv">Load from CSV</option>
+                    <option value="json">Load from JSON</option>
+                </select>
+                <button class="filter-select" id="reloadBtn" style="cursor: pointer; background: #667eea; color: white; border: none;">Reload Data</button>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalRisks">0</div>
+                    <div>Total Risks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="visibleRisks">0</div>
+                    <div>Visible</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="principleCount">5</div>
+                    <div>OECD Principles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="domainCount">0</div>
+                    <div>Risk Domains</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <h3 style="margin-bottom: 20px; color: #333;">Browse by Category</h3>
+                <div id="treeView"></div>
+            </div>
+            
+            <div class="main-content">
+                <div class="data-source-info" id="dataSourceInfo">Loading...</div>
+                <div class="breadcrumb" id="breadcrumb"></div>
+                <div id="riskDisplay"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allRisks = [];
+        let filteredRisks = [];
+        let currentSelection = { principle: null, domain: null, facet: null };
+        let expandedNodes = new Set();
+
+        // Parse CSV data
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim());
+            
+            return lines.slice(1).map(line => {
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current.trim());
+                
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header] = values[index] || '';
+                });
+                return obj;
+            });
+        }
+
+        // Load data from selected source (CSV or JSON)
+        async function loadData() {
+            const dataSource = document.getElementById('dataSourceSelect').value;
+            const loadingMessage = document.getElementById('riskDisplay');
+            const dataSourceInfo = document.getElementById('dataSourceInfo');
+            
+            try {
+                loadingMessage.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">Loading data...</div>';
+                dataSourceInfo.textContent = `Loading from ${dataSource.toUpperCase()}...`;
+                
+                if (dataSource === 'json') {
+                    const response = await fetch('data/taxonomy.json');
+                    const jsonData = await response.json();
+                    allRisks = jsonData.risks;
+                    
+                    // Update metadata if available
+                    if (jsonData.metadata) {
+                        document.getElementById('totalRisks').textContent = jsonData.metadata.total_risks;
+                        dataSourceInfo.textContent = `JSON v${jsonData.metadata.version} (${jsonData.metadata.last_updated})`;
+                        console.log(`Loaded ${jsonData.metadata.total_risks} risks from JSON (v${jsonData.metadata.version})`);
+                    } else {
+                        dataSourceInfo.textContent = `JSON (${allRisks.length} risks)`;
+                    }
+                } else {
+                    const response = await fetch('data/taxonomy.csv');
+                    const csvText = await response.text();
+                    allRisks = parseCSV(csvText);
+                    document.getElementById('totalRisks').textContent = allRisks.length;
+                    dataSourceInfo.textContent = `CSV (${allRisks.length} risks)`;
+                    console.log(`Loaded ${allRisks.length} risks from CSV`);
+                }
+            } catch (error) {
+                console.error(`Error loading ${dataSource.toUpperCase()}:`, error);
+                loadingMessage.innerHTML = `<div style="text-align: center; padding: 40px; color: #e74c3c;">
+                    <strong>Error loading data</strong><br>
+                    Could not load the ${dataSource.toUpperCase()} file. Please ensure data/taxonomy.${dataSource} exists.
+                    <br><br>
+                    <button onclick="loadData()" style="padding: 8px 16px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        Try Again
+                    </button>
+                </div>`;
+                dataSourceInfo.textContent = `Error loading ${dataSource.toUpperCase()}`;
+                return;
+            }
+            
+            filteredRisks = [...allRisks];
+            setupFilters();
+            buildTreeView();
+            displayRisks();
+            updateStats();
+        }
+
+        // Setup filter dropdowns
+        function setupFilters() {
+            const principleFilter = document.getElementById('principleFilter');
+            const insightFilter = document.getElementById('insightFilter');
+            
+            // Clear existing options (except first)
+            principleFilter.innerHTML = '<option value="">All OECD Principles</option>';
+            insightFilter.innerHTML = '<option value="">All Insight Levels</option>';
+            
+            // Populate principle filter
+            const principles = [...new Set(allRisks.map(r => r['OECD Principle']))].sort();
+            principles.forEach(principle => {
+                const option = document.createElement('option');
+                option.value = principle;
+                option.textContent = principle;
+                principleFilter.appendChild(option);
+            });
+            
+            // Populate insight level filter
+            const insights = [...new Set(allRisks.map(r => r['Potential Insight Level']))].sort();
+            insights.forEach(insight => {
+                const option = document.createElement('option');
+                option.value = insight;
+                option.textContent = insight;
+                insightFilter.appendChild(option);
+            });
+        }
+
+        // Update statistics
+        function updateStats() {
+            const principles = [...new Set(allRisks.map(r => r['OECD Principle']))];
+            const domains = [...new Set(allRisks.map(r => r['Risk domain']))];
+            
+            document.getElementById('principleCount').textContent = principles.length;
+            document.getElementById('domainCount').textContent = domains.length;
+        }
+
+        // Build tree view
+        function buildTreeView() {
+            const treeView = document.getElementById('treeView');
+            treeView.innerHTML = '';
+            
+            const principles = [...new Set(allRisks.map(r => r['OECD Principle']))].sort();
+            
+            principles.forEach(principle => {
+                const principleEl = createTreeNode(principle, 'principle', () => {
+                    toggleExpanded(principle);
+                    selectPrinciple(principle);
+                });
+                treeView.appendChild(principleEl);
+                
+                if (expandedNodes.has(principle)) {
+                    const domains = [...new Set(allRisks
+                        .filter(r => r['OECD Principle'] === principle)
+                        .map(r => r['Risk domain']))].sort();
+                    
+                    domains.forEach(domain => {
+                        const domainEl = createTreeNode(domain, 'domain', () => {
+                            toggleExpanded(`${principle}|${domain}`);
+                            selectDomain(principle, domain);
+                        });
+                        treeView.appendChild(domainEl);
+                        
+                        if (expandedNodes.has(`${principle}|${domain}`)) {
+                            const facets = [...new Set(allRisks
+                                .filter(r => r['OECD Principle'] === principle && r['Risk domain'] === domain)
+                                .map(r => r['Neutral Facet']))].sort();
+                            
+                            facets.forEach(facet => {
+                                const facetEl = createTreeNode(facet, 'facet', () => {
+                                    selectFacet(principle, domain, facet);
+                                });
+                                treeView.appendChild(facetEl);
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        // Create tree node element
+        function createTreeNode(text, level, onClick) {
+            const div = document.createElement('div');
+            div.className = 'tree-item';
+            
+            const node = document.createElement('div');
+            node.className = `tree-node ${level}`;
+            node.onclick = onClick;
+            
+            if (level === 'principle' || level === 'domain') {
+                const icon = document.createElement('span');
+                icon.innerHTML = '▶';
+                icon.className = 'expand-icon';
+                node.appendChild(icon);
+            }
+            
+            const textSpan = document.createElement('span');
+            textSpan.textContent = text;
+            node.appendChild(textSpan);
+            
+            div.appendChild(node);
+            return div;
+        }
+
+        // Toggle expanded state
+        function toggleExpanded(key) {
+            if (expandedNodes.has(key)) {
+                expandedNodes.delete(key);
+            } else {
+                expandedNodes.add(key);
+            }
+            buildTreeView();
+        }
+
+        // Selection functions
+        function selectPrinciple(principle) {
+            currentSelection = { principle, domain: null, facet: null };
+            updateBreadcrumb();
+            displayRisks();
+        }
+
+        function selectDomain(principle, domain) {
+            currentSelection = { principle, domain, facet: null };
+            updateBreadcrumb();
+            displayRisks();
+        }
+
+        function selectFacet(principle, domain, facet) {
+            currentSelection = { principle, domain, facet };
+            updateBreadcrumb();
+            displayRisks();
+        }
+
+        // Update breadcrumb
+        function updateBreadcrumb() {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const parts = [];
+            
+            if (currentSelection.principle) {
+                parts.push(`<a href="#" onclick="selectPrinciple('${currentSelection.principle.replace(/'/g, '\\\'')}')">${currentSelection.principle}</a>`);
+            }
+            if (currentSelection.domain) {
+                parts.push(`<a href="#" onclick="selectDomain('${currentSelection.principle.replace(/'/g, '\\\'') }', '${currentSelection.domain.replace(/'/g, '\\\'')}')">${currentSelection.domain}</a>`);
+            }
+            if (currentSelection.facet) {
+                parts.push(currentSelection.facet);
+            }
+            
+            breadcrumb.innerHTML = parts.length ? parts.join(' > ') : 'All Risks';
+        }
+
+        // Display risks
+        function displayRisks() {
+            const riskDisplay = document.getElementById('riskDisplay');
+            
+            let risks = filteredRisks;
+            
+            // Apply selection filters
+            if (currentSelection.principle) {
+                risks = risks.filter(r => r['OECD Principle'] === currentSelection.principle);
+            }
+            if (currentSelection.domain) {
+                risks = risks.filter(r => r['Risk domain'] === currentSelection.domain);
+            }
+            if (currentSelection.facet) {
+                risks = risks.filter(r => r['Neutral Facet'] === currentSelection.facet);
+            }
+            
+            document.getElementById('visibleRisks').textContent = risks.length;
+            
+            if (risks.length === 0) {
+                riskDisplay.innerHTML = '<div class="no-results">No risks found matching your criteria.</div>';
+                return;
+            }
+            
+            riskDisplay.innerHTML = risks.map(risk => `
+                <div class="risk-card">
+                    <div class="risk-title">${risk['Neutral Facet']}</div>
+                    <div class="risk-description">${risk['Brief Description']}</div>
+                    <div class="risk-content">${risk['Relevant Risks']}</div>
+                    <div class="risk-meta">
+                        <span><strong>Domain:</strong> ${risk['Risk domain']}</span>
+                        <span class="risk-badge badge-${risk['Potential Insight Level'].toLowerCase()}">${risk['Potential Insight Level']}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search and filter functionality
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const principleFilter = document.getElementById('principleFilter').value;
+            const insightFilter = document.getElementById('insightFilter').value;
+            
+            filteredRisks = allRisks.filter(risk => {
+                const matchesSearch = !searchTerm || 
+                    risk['Neutral Facet'].toLowerCase().includes(searchTerm) ||
+                    risk['Brief Description'].toLowerCase().includes(searchTerm) ||
+                    risk['Relevant Risks'].toLowerCase().includes(searchTerm) ||
+                    risk['Risk domain'].toLowerCase().includes(searchTerm);
+                
+                const matchesPrinciple = !principleFilter || risk['OECD Principle'] === principleFilter;
+                const matchesInsight = !insightFilter || risk['Potential Insight Level'] === insightFilter;
+                
+                return matchesSearch && matchesPrinciple && matchesInsight;
+            });
+            
+            displayRisks();
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('principleFilter').addEventListener('change', applyFilters);
+        document.getElementById('insightFilter').addEventListener('change', applyFilters);
+        document.getElementById('reloadBtn').addEventListener('click', loadData);
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Projects Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f8f9fa; color: #212529; margin: 0; padding: 2rem; }
+        h1 { color: #343a40; text-align: center; }
+        .container { max-width: 1200px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-top: 2rem; table-layout: fixed; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6; vertical-align: middle; word-wrap: break-word; }
+        thead th { background-color: #e9ecef; color: #495057; }
+        tr:hover { background-color: #f1f3f5; }
+        a { color: #007bff; text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; }
+        .th-pname { width: 20%; }
+        .th-progress { width: 240px; }
+        .th-cstage {width:8%}
+        .th-badge, .th-risk, .th-risk-total { width: 6%; text-align: center; }
+        .progress-icons img { width: 32px; height: 32px; margin-right: 8px; }
+        .badge-icon img { width: 72px; height: 72px; }
+        .badge-icon, .risk-cell, .risk-total-cell { text-align: center; }
+        .risk-count { display: inline-block; font-weight: bold; font-size: 0.9rem; padding: 0.3rem 0.6rem; border-radius: 6px; min-width: 20px; }
+        .risk-total-cell button { background-color: #6c757d; color: white; border: none; padding: 0.5rem 0.8rem; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background-color 0.2s; }
+        .risk-total-cell button:hover { background-color: #5a6268; }
+        .risk-total-cell button:disabled { background-color: #adb5bd; cursor: not-allowed; }
+        .risk-red { background-color: #f8d7da; color: #721c24; }
+        .risk-amber { background-color: #fff3cd; color: #856404; }
+        .risk-green { background-color: #d4edda; color: #155724; }
+        #loading { text-align: center; padding: 2rem; font-style: italic; color: #6c757d; }
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: #fefefe; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 700px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
+        .modal-header { padding-bottom: 10px; border-bottom: 1px solid #dee2e6; }
+        .modal-header h2 { margin: 0; color: #343a40; }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; cursor: pointer; }
+        #risk-list { list-style-type: none; padding: 0; margin-top: 15px; }
+        #risk-list li { background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 12px; margin-bottom: 8px; border-radius: 5px; }
+        #risk-list li strong { color: #495057; }
+        /* ADDED: Style for the new risk name links */
+        #risk-list li strong a { color: #007bff; text-decoration: none; }
+        #risk-list li strong a:hover { text-decoration: underline; }
+        #risk-list li p { margin: 5px 0 0 0; font-size: 0.9rem; color: #6c757d; }
+        #modal-loading { text-align: center; padding: 2rem; }
+    </style>
+</head> 
+<body>
+
+    <div class="container">
+        <h1>AI Safety, Security & Ethics Dashboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th class="th-pname">Project Name</th>
+                    <th class="th-cstage">Current Stage</th>
+                    <th class="th-progress">Progress</th>
+                    <th class="th-badge">Badge</th>
+                    <th class="th-risk-total">Total Risks</th>
+                    <th class="th-risk">Red</th>
+                    <th class="th-risk">Amber</th>
+                    <th class="th-risk">Green</th>
+                </tr>
+            </thead>
+            <tbody id="projects-table-body">
+                <tr id="loading">
+                    <td colspan="8">Loading project data...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Risk Modal Structure -->
+    <div id="risk-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <h2 id="modal-title">Development Risks</h2>
+            </div>
+            <div id="modal-body">
+                <p id="modal-loading">Loading risks...</p>
+                <ul id="risk-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. SUPABASE CLIENT SETUP
+        const SUPABASE_URL = 'https://ebravmuthfxwmashkfwl.supabase.co'; // <-- ❗ Replace with your Supabase project URL
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVicmF2bXV0aGZ4d21hc2hrZndsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAxMjU0MzUsImV4cCI6MjA2NTcwMTQzNX0.X40C1KYfk3kA0bkG65lP_tSFpu9qkw9hsbEuvizSsGk'; // <-- ❗ Replace with your Supabase anon key
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- Get Modal Elements ---
+        const modal = document.getElementById('risk-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalLoading = document.getElementById('modal-loading');
+        const riskList = document.getElementById('risk-list');
+
+        // 2. DATA FETCHING AND RENDERING
+        async function loadProjects() {
+            const tableBody = document.getElementById('projects-table-body');
+            const loadingRow = document.getElementById('loading');
+
+            // --- Fetch all stage names from the database ---
+            const { data: stages, error: stagesError } = await supabaseClient
+                .from('progress_stages')
+                .select('stage_order, stage_name')
+                .order('stage_order', { ascending: true });
+            
+            if (stagesError) {
+                console.error("Error fetching stages:", stagesError);
+                loadingRow.innerHTML = `<td colspan="8" style="color: red;">Could not load stage names. See console.</td>`;
+                return;
+            }
+            
+            const stageNamesMap = new Map(stages.map(stage => [stage.stage_order, stage.stage_name]));
+
+            // --- Fetch all project data from the view ---
+            const { data: projects, error: projectsError } = await supabaseClient
+                .from('project_risk_overview')
+                .select('*')
+                .order('name', { ascending: true });
+
+            if (projectsError) {
+                console.error("Error fetching projects:", projectsError);
+                loadingRow.innerHTML = `<td colspan="8" style="color: red;">Error loading project data. See console.</td>`;
+                return;
+            }
+
+            if (!projects || projects.length === 0) {
+                loadingRow.innerHTML = `<td colspan="8">No projects found.</td>`;
+                return;
+            }
+
+            tableBody.innerHTML = ''; 
+
+            // 3. DYNAMIC HTML GENERATION
+            for (const project of projects) {
+                const row = document.createElement('tr');
+
+                let progressHtml = '';
+                for (let i = 1; i <= 6; i++) {
+                    const iconType = (i <= project.current_progress_order) ? 'y' : 'n';
+                    const stageName = stageNamesMap.get(i) || `Stage ${i}`; 
+                    progressHtml += `<img src="media/${i}${iconType}.svg" alt="${stageName}" title="${stageName}">`;
+                }
+
+                const badgeFile = `media/b${project.badge_level || "Blue"}.svg`;
+
+                // --- Total risks cell is now a button ---
+                const totalRisksButton = project.total_rmp_risks > 0 
+                    ? `<button onclick="showRisksModal('${project.id}', '${project.name}')">${project.total_rmp_risks}</button>`
+                    : `<button disabled>0</button>`;
+
+                row.innerHTML = `
+                    <td><a href="${project.repository_url}" target="_blank" rel="noopener noreferrer">${project.name}</a></td>
+                    <td>${project.current_progress_stage_name}</td>
+                    <td class="progress-icons">${progressHtml}</td>
+                    <td class="badge-icon"><img src="${badgeFile}" alt="Badge"></td>
+                    <td class="risk-total-cell">${totalRisksButton}</td>
+                    <td class="risk-cell"><span class="risk-count risk-red">${project.red_rmp_risks}</span></td>
+                    <td class="risk-cell"><span class="risk-count risk-amber">${project.amber_rmp_risks}</span></td>
+                    <td class="risk-cell"><span class="risk-count risk-green">${project.green_rmp_risks}</span></td>
+                `;
+                tableBody.appendChild(row);
+            }
+        }
+
+        // 4. MODAL FUNCTIONS
+        async function showRisksModal(projectId, projectName) {
+            // Reset and show modal
+            modal.style.display = 'block';
+            modalTitle.innerText = `Development Risks for ${projectName}`;
+            riskList.innerHTML = '';
+            modalLoading.style.display = 'block';
+
+            // --- UPDATED: Fetch taxonomy data first to create a lookup map ---
+            const { data: taxonomyData, error: taxonomyError } = await supabaseClient
+                .from('risk_taxonomy')
+                .select('id, risk_name');
+            
+            if (taxonomyError) {
+                console.error("Error fetching risk taxonomy:", taxonomyError);
+                modalLoading.style.display = 'none';
+                riskList.innerHTML = `<li><p style="color: red;">Could not load risk taxonomy data.</p></li>`;
+                return;
+            }
+
+            const riskNameToIdMap = new Map(taxonomyData.map(item => [item.risk_name, item.id]));
+
+            // Fetch risks for the specific project from the rmp_risks table
+            const { data: risks, error: risksError } = await supabaseClient
+                .from('rmp_risks')
+                .select('risk_name, description, risk_zone, mitigation_strategy')
+                .eq('project_id', projectId)
+                .order('risk_name');
+
+            modalLoading.style.display = 'none';
+
+            if (risksError) {
+                console.error("Error fetching risks:", risksError);
+                riskList.innerHTML = `<li><p style="color: red;">Could not load risks.</p></li>`;
+                return;
+            }
+
+            if (!risks || risks.length === 0) {
+                riskList.innerHTML = `<li><p>No development risks found for this project.</p></li>`;
+                return;
+            }
+
+            // --- UPDATED: Populate the modal with clickable risk names ---
+            for (const risk of risks) {
+                const li = document.createElement('li');
+                const taxonomyId = riskNameToIdMap.get(risk.risk_name);
+
+                // Create a clickable link if an ID was found in the taxonomy map
+                const riskNameHtml = taxonomyId
+                    ? `<a href="https://techinnocens.github.io/AISaE_Patterns/taxonomy.html?id=${taxonomyId}" target="_blank" rel="noopener noreferrer">${risk.risk_name || 'Unnamed Risk'}</a>`
+                    : (risk.risk_name || 'Unnamed Risk'); // Fallback to plain text if no ID is found
+
+                li.innerHTML = `
+                    <strong>${riskNameHtml}</strong> (Zone: ${risk.risk_zone || 'N/A'})
+                    <p><strong>Description:</strong> ${risk.description || 'No description provided.'}</p>
+                    <p><strong>Mitigation:</strong> ${risk.mitigation_strategy || 'No mitigation strategy provided.'}</p>
+                `;
+                riskList.appendChild(li);
+            }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal if user clicks outside of the modal content
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProjects);
+    </script>
+
+</body>
+</html>

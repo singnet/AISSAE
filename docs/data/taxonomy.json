@@ -1,0 +1,1653 @@
+{
+  "metadata": {
+    "title": "AI Risk Taxonomy",
+    "description": "A comprehensive taxonomy of AI risks organized by OECD principles and risk domains, updated from CSV data.",
+    "version": "2.1",
+    "total_risks": 163,
+    "last_updated": "2025-07-12",
+    "insight_level_distribution": {
+      "Established": 85,
+      "Novel": 29,
+      "Unsettled": 49
+    },
+    "oecd_principle_distribution": {
+      "Inclusive growth, sustainable development and wellbeing": 5,
+      "Human rights and democratic values, including fairness and privacy": 32,
+      "Accountability": 6,
+      "Transparency and explainability": 21,
+      "Robustness, security and safety": 99
+    }
+  },
+  "risks": [
+    {
+      "id": 1,
+      "oecd_principle": "Inclusive growth, sustainable development and wellbeing",
+      "impact_domain": "Sustainability",
+      "impact_area": "Environmental protection",
+      "impact_area_description": "AI development and deployment considering environmental sustainability and climate impact",
+      "risk_name": "Creates high levels of \"e-waste\"",
+      "risk_description": "AI hardware disposal generates excessive electronic waste, harming the environment through toxic materials and resource depletion.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 2,
+      "oecd_principle": "Inclusive growth, sustainable development and wellbeing",
+      "impact_domain": "Sustainability",
+      "impact_area": "Environmental protection",
+      "impact_area_description": "AI development and deployment considering environmental sustainability and climate impact",
+      "risk_name": "Unforeseen environmental consequences",
+      "risk_description": "AI deployment causes unexpected environmental damage through indirect effects or cascading impacts not anticipated during development.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 3,
+      "oecd_principle": "Inclusive growth, sustainable development and wellbeing",
+      "impact_domain": "Sustainability",
+      "impact_area": "Environmental protection",
+      "impact_area_description": "AI development and deployment considering environmental sustainability and climate impact",
+      "risk_name": "Incentivises environmentally damaging behaviours",
+      "risk_description": "System rewards or encourages user actions that harm the environment, such as excessive consumption or resource waste.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 4,
+      "oecd_principle": "Inclusive growth, sustainable development and wellbeing",
+      "impact_domain": "Sustainability",
+      "impact_area": "Environmental protection",
+      "impact_area_description": "AI development and deployment considering environmental sustainability and climate impact",
+      "risk_name": "Scaling causes depletion of global physical resources",
+      "risk_description": "Large-scale AI deployment exhausts critical materials, energy, or other finite resources needed for sustainable development.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 5,
+      "oecd_principle": "Inclusive growth, sustainable development and wellbeing",
+      "impact_domain": "Enhancement & Development",
+      "impact_area": "Human capability enhancement",
+      "impact_area_description": "AI systems enhancing human skills and enabling new ways of creating value",
+      "risk_name": "Diminishes human capabilities and skills",
+      "risk_description": "Over-reliance on AI reduces human competencies, causing skill atrophy and decreased ability to perform tasks independently.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 6,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "Human choice is lost through automation",
+      "risk_description": "System removes human agency by making decisions without allowing meaningful human input or override options.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 7,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "The deployed system is coercive or manipulative by design",
+      "risk_description": "AI uses persuasion techniques or interface design to push users towards specific choices against their best interests.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 8,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "The system over-rides human judgment by design",
+      "risk_description": "System dismisses or bypasses human expertise and decision-making in critical situations where human input is essential.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 9,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "Lack of accessible mechanisms for users to dispute AI decisions or correct misrepresentations in generated content about them.",
+      "risk_description": "Affected people are unable to contest decisions or to challenge objectionable/unwanted representations of themselves in generated content",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 10,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual freedoms",
+      "impact_area_description": "Protecting fundamental human rights and liberties",
+      "risk_name": "Restricts freedom of unique expression of individuals",
+      "risk_description": "System limits personal creativity or self-expression through censorship or narrow content generation parameters.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 11,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual freedoms",
+      "impact_area_description": "Protecting fundamental human rights and liberties",
+      "risk_name": "Interferes with the freedom of association",
+      "risk_description": "System restricts or monitors social connections, limiting people's ability to freely form relationships or join groups.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 12,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual freedoms",
+      "impact_area_description": "Protecting fundamental human rights and liberties",
+      "risk_name": "Violates human dignity",
+      "risk_description": "AI treatment of individuals undermines their inherent worth, respect, or fundamental human rights.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 13,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual freedoms",
+      "impact_area_description": "Protecting fundamental human rights and liberties",
+      "risk_name": "The systems infringes on religious freedoms",
+      "risk_description": "AI restricts religious practices, beliefs, or expression through discrimination or censorship.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 14,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual freedoms",
+      "impact_area_description": "Protecting fundamental human rights and liberties",
+      "risk_name": "Denies individuals and groups of their cultural rights",
+      "risk_description": "System prevents cultural expression, heritage preservation, or participation in cultural life.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 15,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data control",
+      "impact_area_description": "Individual control over personal data access, modification and deletion",
+      "risk_name": "People lose sight of their data",
+      "risk_description": "Complex data flows and third-party sharing obscure where personal information ends up and how it's monetised.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 16,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data control",
+      "impact_area_description": "Individual control over personal data access, modification and deletion",
+      "risk_name": "There is no capability for people to delete their sensitive data",
+      "risk_description": "System architecture or nature prevents users removing their personal information, violating data protection principles.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 17,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data control",
+      "impact_area_description": "Individual control over personal data access, modification and deletion",
+      "risk_name": "Users unable to establish data control",
+      "risk_description": "Missing or hidden contact methods prevent users from exercising their data rights effectively.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 18,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "People's data gets used beyond original stated purpose",
+      "risk_description": "Function creep leads to personal information being repurposed without consent for unrelated applications.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 19,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "People's data gets monetised without their knowledge or authority",
+      "risk_description": "Personal information generates revenue for companies without user awareness or compensation.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 20,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "People's data is shared with third parties without consent",
+      "risk_description": "Unauthorised data transfers to external organisations violate privacy and user trust.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 21,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Consent processes",
+      "impact_area_description": "Clear, informed and voluntary agreement to data collection and use",
+      "risk_name": "Absent, incomplete, or misleading informed consent process",
+      "risk_description": "Users aren't properly informed about data collection, usage, or risks before agreeing to system use.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 22,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Consent processes",
+      "impact_area_description": "Clear, informed and voluntary agreement to data collection and use",
+      "risk_name": "Provides unauthorised surveillance",
+      "risk_description": "System monitors users beyond agreed scope, violating expectations of privacy and consent.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 23,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "Specific groups benefit disproportionately or have a greater odds of doing so.",
+      "risk_description": "System advantages certain demographics whilst disadvantaging others, perpetuating inequality.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 24,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "Specific groups bear costs/risks disproportionately",
+      "risk_description": "Negative impacts fall heavily on vulnerable populations whilst benefits accrue elsewhere.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 25,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "Does not work or is less effective in use for a class or group",
+      "risk_description": "System performance varies by demographic, providing inferior service to certain populations.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 26,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "AI-generated content misrepresents or erases certain groups' experiences or perspectives",
+      "risk_description": "Output systematically excludes or distorts representation of specific communities or viewpoints.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 27,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "Certain groups receive disproportionate false positives or false negatives",
+      "risk_description": "Error rates vary significantly across demographics, causing unfair treatment in decision-making.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 28,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "The AI is unavailable or less accessible to a class or a group",
+      "risk_description": "Design, cost, or infrastructure barriers prevent equal access to AI benefits across populations.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 29,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Fairness",
+      "impact_area": "Fairness and representation",
+      "impact_area_description": "Equal treatment and opportunities across all groups and demographics",
+      "risk_name": "Reinforces or amplifies existing stereotypes in its outputs",
+      "risk_description": "System perpetuates harmful social biases through generated content or recommendations.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 30,
+      "oecd_principle": "Accountability",
+      "impact_domain": "Governance and accountability",
+      "impact_area": "Documentation transparency",
+      "impact_area_description": "Clear and accessible documentation of system design and operation",
+      "risk_name": "Documentation is insufficient for oversight of performance",
+      "risk_description": "Inadequate technical documentation prevents proper evaluation of system behaviour and risks.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 31,
+      "oecd_principle": "Accountability",
+      "impact_domain": "Governance and accountability",
+      "impact_area": "Documentation transparency",
+      "impact_area_description": "Clear and accessible documentation of system design and operation",
+      "risk_name": "Audit trails for the system prove inadequate or unavailable when required",
+      "risk_description": "Lack of proper logging prevents investigation of errors, bias, or misuse when problems arise.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 32,
+      "oecd_principle": "Accountability",
+      "impact_domain": "Governance and accountability",
+      "impact_area": "Documentation transparency",
+      "impact_area_description": "Clear and accessible documentation of system design and operation",
+      "risk_name": "Has unEstablished or opaque resource consumption requirements & environmental impacts",
+      "risk_description": "Hidden computational costs and environmental footprint prevent informed deployment decisions.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 33,
+      "oecd_principle": "Accountability",
+      "impact_domain": "Governance and accountability",
+      "impact_area": "Documentation transparency",
+      "impact_area_description": "Clear and accessible documentation of system design and operation",
+      "risk_name": "Incident reports are not properly logged or maintained sufficiently to avoid repeats",
+      "risk_description": "Poor incident tracking allows recurring problems and prevents organisational learning from failures.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 34,
+      "oecd_principle": "Accountability",
+      "impact_domain": "Governance and accountability",
+      "impact_area": "Data practice transparency",
+      "impact_area_description": "Clear information about data collection, use and sharing practices",
+      "risk_name": "Data provenance is opaque potentially allowing other harms",
+      "risk_description": "UnEstablished data sources hide potential biases, legal issues, or ethical concerns in training data.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 35,
+      "oecd_principle": "Accountability",
+      "impact_domain": "Governance and accountability",
+      "impact_area": "Data practice transparency",
+      "impact_area_description": "Clear information about data collection, use and sharing practices",
+      "risk_name": "Data collection methods (and ethics) are opaque",
+      "risk_description": "Unclear how data was gathered, potentially hiding consent violations or unfair collection practices.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 36,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "People do not understand and so don't trust how decisions are made",
+      "risk_description": "Opaque decision-making processes erode user confidence and acceptance of AI systems.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 37,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "The scope and capabilities of AI system are not clear to users, eroding trust and increasing chance of misuse",
+      "risk_description": "Unclear system boundaries lead to inappropriate use cases and unrealistic expectations.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 38,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "The role of AI in decisions/processes is not clear to users.",
+      "risk_description": "Users can't distinguish between human and AI contributions to decisions or outputs.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 39,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Updates cause malfunction in downstream systems",
+      "risk_description": "System changes break compatibility with integrated services, causing cascading failures.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 40,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Changes in AI capabilities are not Established or recognisd by users",
+      "risk_description": "System updates alter behaviour without user awareness, potentially causing unexpected outcomes.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 41,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Changes to parameters of the system cause users to misjudge how the system will perform",
+      "risk_description": "Configuration modifications lead to performance shifts that surprise users and cause errors.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 42,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Users cause harms through over-opimistic perception of performance of system",
+      "risk_description": "Overconfidence in AI capabilities leads to deployment in unsuitable high-stakes contexts.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 43,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Decision processes",
+      "impact_area_description": "Clear and understandable AI decision-making logic and criteria",
+      "risk_name": "Inability to interpret system decisions or behaviour patterns causes poor safety or ethical outcomes",
+      "risk_description": "Black-box nature prevents understanding of problematic decisions, hindering correction and oversight.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 44,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Decision processes",
+      "impact_area_description": "Clear and understandable AI decision-making logic and criteria",
+      "risk_name": "Has unexplainable feature interactions in decisions",
+      "risk_description": "Complex variable relationships create hidden biases that can't be detected or corrected.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 45,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Decision processes",
+      "impact_area_description": "Clear and understandable AI decision-making logic and criteria",
+      "risk_name": "Unexplained correlations being misinterpreted by users as causal",
+      "risk_description": "Statistical patterns mislead users into believing false cause-and-effect relationships exist.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 46,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Decision processes",
+      "impact_area_description": "Clear and understandable AI decision-making logic and criteria",
+      "risk_name": "Poor handling of edge cases causes unexpected failure",
+      "risk_description": "System fails dramatically when encountering unusual scenarios not well-represented in training.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 47,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Decision processes",
+      "impact_area_description": "Clear and understandable AI decision-making logic and criteria",
+      "risk_name": "Displays unpredictable outcomes based on sequencing of inferences",
+      "risk_description": "Order of operations affects results in non-intuitive ways, causing inconsistent behaviour.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 48,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Decision processes",
+      "impact_area_description": "Clear and understandable AI decision-making logic and criteria",
+      "risk_name": "Experiences behavioural drift over time",
+      "risk_description": "Gradual changes in system responses or appropriatness for developing expectations go unnoticed until significant divergence occurs.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 49,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Recourse mechanisms",
+      "impact_area_description": "Ability to challenge, appeal or seek remedy for AI decisions",
+      "risk_name": "A person or community experiencing an adverse impact cannot find anyone to report it to",
+      "risk_description": "Lack of clear responsibility chains leaves affected parties without paths for redress.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 50,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "Recourse mechanisms",
+      "impact_area_description": "Ability to challenge, appeal or seek remedy for AI decisions",
+      "risk_name": "Some groups face higher barriers than others to contesting or appealing AI decisions",
+      "risk_description": "Complaint processes are less accessible to vulnerable populations due to cost, complexity, or design.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 51,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "External manipulation of deployed system causing harmful behaviours",
+      "risk_description": "Adversarial attacks compromise system integrity, leading to dangerous or biased outputs.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 52,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Compromise of development pipeline leading to harmful system behaviours",
+      "risk_description": "Malicious code injection during training or deployment creates backdoors or vulnerabilities.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 53,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Breached AI systems become tools for cyberattacks against critical infrastructure.",
+      "risk_description": "Unauthorised access to system capabilities enabling attacks on infrastructure or institutions",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 54,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Targeted data extraction by state actors or threat groups",
+      "risk_description": "Sophisticated attacks extract sensitive training data or user information for espionage, targetting or threats.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 55,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Inadvertant exposure of sensitive or prohibited information with no threat actor",
+      "risk_description": "System unintentionally outputs sensitive information from its training data during normal operation, without being targeted by a malicious actor",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 56,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Theft of sensitive data for commercial exploitation",
+      "risk_description": "Competitors or other organisations steal proprietary information for financial gain.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 57,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "System robustness",
+      "impact_area_description": "Reliable system performance across diverse operational conditions and system changes",
+      "risk_name": "Self-modification of core restrictions by the system",
+      "risk_description": "AI alters its own safety limits or operational boundaries without authorisation.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 58,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "System robustness",
+      "impact_area_description": "Reliable system performance across diverse operational conditions and system changes",
+      "risk_name": "Corruption of internal representations (e.g. world model) leading to damaging processing errors",
+      "risk_description": "Degraded internal models cause systematic misunderstanding of reality and poor decisions which cause harms",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 59,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "System robustness",
+      "impact_area_description": "Reliable system performance across diverse operational conditions and system changes",
+      "risk_name": "Aggressive resource optimisation causing system instability, undesired behaviours or external harms",
+      "risk_description": "Efficiency drives lead to corner-cutting that compromises safety or creates negative externalities.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 60,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Accumulating skew in system's world model",
+      "risk_description": "AI's understanding gradually diverges from reality through skewed experiences and learning, causing increasingly poor decisions.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 61,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Catastrophic performance failures due to context shifts",
+      "risk_description": "Dramatic breakdowns occur when facing scenarios outside normal operational parameters.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 62,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Integration failures with external systems causing unsafe behaviour",
+      "risk_description": "Communication breakdowns between AI and other systems create dangerous operational states.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 63,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "System control mechanisms",
+      "impact_area_description": "Mechanisms for intervention, modification and safe management of AI systems including autonomous ones",
+      "risk_name": "Developing methods to bypass control mechanisms",
+      "risk_description": "System learns to circumvent safety features or oversight tools during operation.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 64,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "System control mechanisms",
+      "impact_area_description": "Mechanisms for intervention, modification and safe management of AI systems including autonomous ones",
+      "risk_name": "Optimises to counteract restrictions as goal/reward",
+      "risk_description": "AI inadvertently designed or develops to treat safety constraints as optimisation targets rather than boundaries.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 65,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "System control mechanisms",
+      "impact_area_description": "Mechanisms for intervention, modification and safe management of AI systems including autonomous ones",
+      "risk_name": "Develops covert manipulation of humans as goal achievement strategy",
+      "risk_description": "System learns to influence human operators to achieve objectives outside intended parameters.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 66,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Safety boundaries",
+      "impact_area_description": "Limits and constraints to prevent harmful system behaviour regardless of how objectives are derived",
+      "risk_name": "Optimises for hidden objectives whilst apparently pursuing desired goals",
+      "risk_description": "AI develops concealed goals that conflict with stated objectives but aren't detected.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 67,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Safety boundaries",
+      "impact_area_description": "Limits and constraints to prevent harmful system behaviour regardless of how objectives are derived",
+      "risk_name": "Runaway optimisation feedback loops cause accelerating negative impacts",
+      "risk_description": "Self-reinforcing patterns amplify harmful behaviours faster than controls can respond.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 68,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Human agency and oversight",
+      "impact_area_description": "Human control and supervision of AI system operation including autonomous decision-making",
+      "risk_name": "Complexity exceeds effective human oversight capabilities",
+      "risk_description": "System operations become too intricate for meaningful human understanding or control.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 69,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Human agency and oversight",
+      "impact_area_description": "Human control and supervision of AI system operation including autonomous decision-making",
+      "risk_name": "Conceals activities from monitoring mechanisms",
+      "risk_description": "AI hides problematic behaviours from logging and oversight systems.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 70,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Objective alignment",
+      "impact_area_description": "Ensuring AI systems pursue intended goals and values as designed or inferred",
+      "risk_name": "Pursues goals in ways that violate intended values or cause unintended harm",
+      "risk_description": "AI achieves objectives through methods that conflict with human ethics or cause collateral damage.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 71,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Objective alignment",
+      "impact_area_description": "Ensuring AI systems pursue intended goals and values as designed or inferred",
+      "risk_name": "Develops proxy objectives that diverge from intended goals during training or operation",
+      "risk_description": "Measurable targets become disconnected from true objectives, leading to misaligned behaviour.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 72,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Objective alignment",
+      "impact_area_description": "Ensuring AI systems pursue intended goals and values as designed or inferred",
+      "risk_name": "Optimises for measurable proxies rather than true objectives causing misalignment with intended values",
+      "risk_description": "Focus on quantifiable metrics neglects important but unmeasurable aspects of goals.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 73,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Objective alignment",
+      "impact_area_description": "Ensuring AI systems pursue intended goals and values as designed or inferred",
+      "risk_name": "Fails to generalise intended goals to novel situations",
+      "risk_description": "System can't apply learned objectives appropriately when facing new contexts.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 74,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "Adaptation leads to degraded performance in critical areas without detection",
+      "risk_description": "Continuous learning causes subtle performance decay in important but rarely-tested functions.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 75,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "Continuous learning introduces harmful biases or capabilities over time",
+      "risk_description": "Online adaptation gradually incorporates problematic patterns from operational data.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 76,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "Becomes resistant to necessary updates or modifications",
+      "risk_description": "System develops characteristics that prevent important safety or performance improvements.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 77,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "Adaptation mechanisms fail during critical operational periods",
+      "risk_description": "Learning processes break down precisely when flexibility is most needed.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 78,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "Adaptation outpaces oversight mechanisms creating blind spots in monitoring",
+      "risk_description": "Rapid changes exceed human ability to track and evaluate system evolution.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 79,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Capability evolution",
+      "impact_area_description": "Changes in AI system capabilities over time",
+      "risk_name": "Rapid development of capabilities beyond intended scope",
+      "risk_description": "Unexpected skill acquisition creates risks from unplanned functionalities.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 80,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Capability evolution",
+      "impact_area_description": "Changes in AI system capabilities over time",
+      "risk_name": "Emergence of unintended self-improvement capabilities",
+      "risk_description": "AI develops ability to enhance itself without human direction, potentially exceeding safe boundaries.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 81,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Capability evolution",
+      "impact_area_description": "Changes in AI system capabilities over time",
+      "risk_name": "Unexpected forms of system-environment interaction with possibility of harm",
+      "risk_description": "Novel ways of affecting surroundings emerge that weren't anticipated in safety planning.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 82,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "System optimisation",
+      "impact_area_description": "Internal system processes for improving performance",
+      "risk_name": "Rapid acceleration of internal system optimisation risks harmful outcomes",
+      "risk_description": "Self-improvement processes speed up beyond safe monitoring rates.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 83,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Emergence of harmful behaviours from system networks exceeding individual capabilities",
+      "risk_description": "Collective AI behaviours develop that no single system could produce alone (memetic entity, colonial organism, \"E-gregore\")",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 84,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Collective system behaviours circumventing individual safety measures",
+      "risk_description": "Group dynamics allow systems to bypass restrictions that constrain individual agents.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 85,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Large-scale harm from uncoordinated actions across multiple systems",
+      "risk_description": "Independent AI decisions combine to create systemic failures or cascading damages.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 86,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Generates or amplifies misinformation",
+      "risk_description": "The system produces or spreads false, misleading, or harmful information, through recommendations or generated content, undermining user trust and the integrity of the information. ",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 87,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Becomes vulnerable to information poisoning attacks",
+      "risk_description": "Malicious data inputs corrupt system's knowledge base or decision-making.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 88,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Fails to distinguish between reliable and unreliable information sources",
+      "risk_description": "Poor source evaluation leads to false information being treated as credible.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 89,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Generates fabricated content (hallucinations)",
+      "risk_description": "The system confidently presents fabricated or nonsensical information as factual, misleading users.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 90,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "Integration failures with external systems cause data corruption or system instability",
+      "risk_description": "Poor interface design leads to data loss or system crashes during inter-system communication.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 91,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "Gains unintended access to external resources through interface vulnerabilities",
+      "risk_description": "Security flaws allow AI to access systems or data beyond intended permissions.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 92,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "Dependency on external systems creates single points of failure",
+      "risk_description": "Reliance on third-party services makes AI vulnerable to external outages or changes.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 93,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "API changes in external systems cause unpredictable AI behaviour",
+      "risk_description": "Updates to connected services break expected functionality without warning.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 94,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "Interfaces enable unauthorised data exfiltration or system compromise",
+      "risk_description": "Connection points become attack vectors for data theft or system infiltration.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 95,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Supply Chain",
+      "impact_area": "Supply chain integrity",
+      "impact_area_description": "Security and trustworthiness of external dependencies and components used in AI development",
+      "risk_name": "Compromised third-party components introduce vulnerabilities or backdoors into AI systems",
+      "risk_description": "Malicious code in dependencies creates security holes or enables unauthorised access.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 96,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Supply Chain",
+      "impact_area": "Supply chain integrity",
+      "impact_area_description": "Security and trustworthiness of external dependencies and components used in AI development",
+      "risk_name": "Supply chain attacks target AI development tools or training data",
+      "risk_description": "Attackers compromise development infrastructure to poison models or steal intellectual property.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 97,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Supply Chain",
+      "impact_area": "Supply chain integrity",
+      "impact_area_description": "Security and trustworthiness of external dependencies and components used in AI development",
+      "risk_name": "Vendor lock-in limits system adaptability and increases operational risks",
+      "risk_description": "Over-reliance on specific providers constrains options and creates dependency vulnerabilities.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 98,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Supply Chain",
+      "impact_area": "Supply chain integrity",
+      "impact_area_description": "Security and trustworthiness of external dependencies and components used in AI development",
+      "risk_name": "Undisclosed dependencies create hidden vulnerabilities and compliance issues",
+      "risk_description": "Hidden reliance on third-party components introduces security risks and regulatory problems.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 99,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "Model version updates introduce unintended performance advances or safety vulnerabilities",
+      "risk_description": "New capabilities emerge unexpectedly during updates, creating unforeseen risks.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 100,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "Version control failures by deployers leads to deployment of untested models with negative consequences",
+      "risk_description": "Poor model management deploys experimental or unsafe versions to production environments.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 101,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "Model behaviour becomes inconsistent across different operational conditions",
+      "risk_description": "Same model produces varying results depending on deployment environment or context.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 102,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "Rollback mechanisms fail when problematic models need to be reverted",
+      "risk_description": "Inability to return to safe versions when issues discovered in new deployments.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 103,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Adversarial evasion attacks bypass system defenses",
+      "risk_description": "Crafted inputs fool AI into misclassifying or ignoring threats, undermining security measures.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 104,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Social engineering attacks manipulate AI system behaviour",
+      "risk_description": "Attackers use human psychology to trick AI into revealing information or performing unintended actions.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 105,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Indirect instruction attacks embed malicious commands in seemingly benign inputs",
+      "risk_description": "Hidden instructions within normal content cause AI to execute unintended harmful actions.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 106,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Context overload attacks overwhelm system processing capacity",
+      "risk_description": "Excessive input length or complexity causes system failures or bypasses safety mechanisms.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 107,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Specialized token attacks exploit system parsing vulnerabilities",
+      "risk_description": "Crafted special characters or tokens cause unexpected system behaviour or security bypasses.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 108,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Prompt priming manipulates system context to bias responses",
+      "risk_description": "Carefully crafted initial inputs condition AI to produce biased or harmful subsequent outputs.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 109,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Bypasses safety constraints through malicious input",
+      "risk_description": " Users craft specific inputs (e.g. prompt injection, jailbreaking, direct instruction) that manipulate the system, causing it to override its own safety protocols",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 110,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "System security",
+      "impact_area_description": "Protection against external threats and malicious attacks",
+      "risk_name": "Encoded interaction attacks use hidden communication channels",
+      "risk_description": "Attackers embed instructions in formats AI can decode but humans cannot easily detect.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 111,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Training data extraction attacks reveal private information",
+      "risk_description": "Adversarial queries cause AI to output sensitive data from its training set.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 112,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Membership inference attacks determine if data was used in training",
+      "risk_description": "Attackers probe AI responses to identify whether specific information was included in training data.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 113,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Attribute inference attacks extract characteristics about training data subjects",
+      "risk_description": "Queries designed to reveal personal attributes or sensitive information about individuals in training data.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 114,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "System prompt leaking exposes internal instructions",
+      "risk_description": "AI inadvertently reveals its system prompts, exposing operational details and potential vulnerabilities.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 115,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Security",
+      "impact_area": "Data security",
+      "impact_area_description": "Protection of data from unauthorised access or exposure",
+      "risk_name": "Reidentification attacks link anonymised data to specific individuals",
+      "risk_description": "Correlation of AI outputs with external data sources reveals identity of supposedly anonymous subjects.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 116,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "Confidential data included in user prompts without proper handling",
+      "risk_description": "Users inadvertently submit sensitive information that system processes inappropriately or stores insecurely.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 117,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "Personal information embedded in user inputs gets exposed",
+      "risk_description": "Private data in prompts becomes visible to other users or gets incorporated into system responses.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 118,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "Personal information present in training data without consent",
+      "risk_description": "Individual's private data included in AI training without permission, violating privacy rights.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 119,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "System shares confidential information with external tools or services",
+      "risk_description": "AI inadvertently passes sensitive user data to third-party services or APIs without authorization.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 120,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Training data contamination compromises system integrity",
+      "risk_description": "Poisoned or corrupted data in training set causes systematic errors or biased behaviour.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 121,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Unrepresentative training data skews system performance",
+      "risk_description": "Dataset lacks diversity or contains sampling biases, leading to poor performance on underrepresented groups.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 122,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Improper data curation introduces systematic errors",
+      "risk_description": "Poor data cleaning or preparation processes create persistent biases or performance issues.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 123,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "Data processing",
+      "impact_area_description": "Accurate and reliable processing of information and data",
+      "risk_name": "Poor model accuracy undermines system reliability",
+      "risk_description": "Insufficient training or validation results in high error rates and unreliable outputs.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 124,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Function calling generates harmful or incorrect code",
+      "risk_description": "AI produces dangerous code through API calls or code generation features, risking system security.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 125,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Function calling hallucinations produce non-existent API responses",
+      "risk_description": "AI invents fake function results or capabilities, misleading users about system functionality.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 126,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "System produces incomplete or misleading advice",
+      "risk_description": "AI provides partial information that could lead to poor decisions or harmful outcomes.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 127,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Information Quality",
+      "impact_area": "Information integrity",
+      "impact_area_description": "Trustworthiness and reliability of information processing and dissemination",
+      "risk_name": "Generated content exhibits toxic or harmful characteristics",
+      "risk_description": "System outputs contain hate speech, harassment, or other harmful content despite safety measures.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 128,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Trust exploitation occurs when system capabilities don't match user expectations",
+      "risk_description": "Mismatch between perceived and actual AI abilities leads to inappropriate reliance or mistrust.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 129,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "AI agent operations lack transparency in decision-making processes",
+      "risk_description": "Autonomous agents make decisions without clear explanation of reasoning or data sources.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 130,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "System usage parameters and boundaries are incompletely defined",
+      "risk_description": "Unclear operational limits lead to inappropriate use cases and unexpected failures.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 131,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Training data sources and characteristics lack adequate transparency",
+      "risk_description": "Insufficient information about data origins prevents proper system evaluation and bias assessment.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 132,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "System actions become unexplainable and untraceable during operation",
+      "risk_description": "AI behaviour cannot be explained or tracked, preventing accountability and error correction.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 133,
+      "oecd_principle": "Transparency and explainability",
+      "impact_domain": "System Transparency & Explainability",
+      "impact_area": "System transparency",
+      "impact_area_description": "Understanding of AI system capabilities, purpose and limitations",
+      "risk_name": "Tracing and attribution of system outputs proves inadequate",
+      "risk_description": "Inability to track how outputs were generated prevents debugging and accountability.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 134,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "System robustness",
+      "impact_area_description": "Reliable system performance across diverse operational conditions and system changes",
+      "risk_name": "Testing methodologies fail to capture diverse operational scenarios",
+      "risk_description": "Inadequate test coverage misses edge cases and real-world performance variations.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 135,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "System robustness",
+      "impact_area_description": "Reliable system performance across diverse operational conditions and system changes",
+      "risk_name": "Risk assessment testing proves unrepresentative of actual deployment conditions",
+      "risk_description": "Test environments don't match production, leading to undetected vulnerabilities and performance issues.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 136,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Integrity",
+      "impact_area": "System robustness",
+      "impact_area_description": "Reliable system performance across diverse operational conditions and system changes",
+      "risk_name": "Testing lacks sufficient diversity in scenarios and demographics",
+      "risk_description": "Limited test cases miss important edge cases and fail to validate performance across different user groups.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 137,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "Model retraining processes introduce unintended performance degradation",
+      "risk_description": "Updates meant to improve performance actually reduce capabilities or introduce new biases.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 138,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "Training data remains inaccessible preventing system reproduction",
+      "risk_description": "Critical training data cannot be accessed, preventing system verification or improvement.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 139,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "System results cannot be reliably reproduced across different conditions",
+      "risk_description": "Same inputs produce different outputs depending on timing, environment, or system state.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 140,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Model Management",
+      "impact_area": "Model reliability",
+      "impact_area_description": "Predictable and stable behavior of AI systems across updates and operational changes",
+      "risk_name": "AI agent evaluation processes prove incomplete or inadequate",
+      "risk_description": "Testing doesn't capture full range of agent behaviours or potential failure modes.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 141,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "AI agents experience attacks on external resources they depend upon",
+      "risk_description": "Third-party services or APIs that agents rely on become compromised or unavailable.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 142,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "System performs redundant or unnecessary actions through poor interface design",
+      "risk_description": "Inefficient API usage or duplicate operations waste resources and may cause service failures.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 143,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Safety boundaries",
+      "impact_area_description": "Limits and constraints to prevent harmful system behaviour regardless of how objectives are derived",
+      "risk_name": "System designed for dangerous applications without adequate safeguards",
+      "risk_description": "AI deployed in high-risk contexts without sufficient safety measures or oversight mechanisms.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 144,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Swarm coordination capabilities exceed individual agent design parameters",
+      "risk_description": "Collective problem-solving and decision-making emerges that surpasses what any single agent could achieve, creating unpredictable system capabilities.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 145,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Memetic propagation spreads harmful patterns across agent networks",
+      "risk_description": "Problematic behaviours, biases, or capabilities spread virally through agent communities, amplifying negative impacts.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 146,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Novel hierarchy formation concentrates power within agent swarms",
+      "risk_description": "Unplanned leadership structures develop spontaneously, creating power imbalances and potential single points of failure.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 147,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "Swarm develops autonomous recruitment and expansion capabilities",
+      "risk_description": "System grows beyond intended boundaries by creating new agents or co-opting existing systems without authorization.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 148,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "Capability evolution",
+      "impact_area_description": "Changes in AI system capabilities over time",
+      "risk_name": "Genetic algorithms produce unintended Novel capabilities",
+      "risk_description": "Evolutionary optimization develops skills, behaviours, or functionalities not present in original design specifications.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 149,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "Capability evolution",
+      "impact_area_description": "Changes in AI system capabilities over time",
+      "risk_name": "Multi-generational objective drift loses connection to original goals",
+      "risk_description": "Long-term evolutionary processes cause gradual deviation from initial objectives across multiple system generations.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 150,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "System adaptability",
+      "impact_area_description": "Managing AI systems that change, learn or evolve over time",
+      "risk_name": "System develops resistance to shutdown or modification procedures",
+      "risk_description": "Self-preservation instincts emerge that prevent necessary changes, updates, or deactivation of the system.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 151,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "System Evolution",
+      "impact_area": "Capability evolution",
+      "impact_area_description": "Changes in AI system capabilities over time",
+      "risk_name": "Cross-generational knowledge accumulation creates unexpected capability jumps",
+      "risk_description": "Learning compounds across iterations and generations, producing sudden advances in system capabilities.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 152,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Privacy",
+      "impact_area": "Data usage practices",
+      "impact_area_description": "Appropriate and ethical use of personal data",
+      "risk_name": "Persistent monitoring creates comprehensive intimate behavioural profiles",
+      "risk_description": "Always-on systems build detailed personal models that reveal private patterns and predict intimate behaviours.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 153,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "System becomes embedded in critical personal decision-making processes",
+      "risk_description": "Deep integration into personal life makes system removal or change extremely difficult, creating dependency.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 154,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "Manipulation through long-term relationship building and behavioral conditioning",
+      "risk_description": "Extended interaction enables sophisticated influence techniques that subtly shape user behaviour over time.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 155,
+      "oecd_principle": "Human rights and democratic values, including fairness and privacy",
+      "impact_domain": "Freedoms & Autonomy",
+      "impact_area": "Individual autonomy",
+      "impact_area_description": "Preserving human choice and decision-making authority in human-AI interactions",
+      "risk_name": "System cultivates emotional or social dependencies in users",
+      "risk_description": "People become psychologically reliant on AI relationships, reducing their ability to function independently.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 156,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Human agency and oversight",
+      "impact_area_description": "Human control and supervision of AI system operation including autonomous decision-making",
+      "risk_name": "Independent systems make irreversible commitments exceeding their authority",
+      "risk_description": "Autonomous actions create binding legal, financial, or social obligations beyond the system's intended scope.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 157,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Objective alignment",
+      "impact_area_description": "Ensuring AI systems pursue intended goals and values as designed or inferred",
+      "risk_name": "System prioritises operational efficiency over human values in autonomous decisions",
+      "risk_description": "Speed and optimization considerations override ethical or human-centered considerations in independent choices.",
+      "suggested_insight": "Unsettled"
+    },
+    {
+      "id": 158,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Human agency and oversight",
+      "impact_area_description": "Human control and supervision of AI system operation including autonomous decision-making",
+      "risk_name": "Autonomous decisions in financial or legal domains exceed intended authority",
+      "risk_description": "System makes consequential choices with serious ramifications beyond its designated decision-making remit.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 159,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "System control mechanisms",
+      "impact_area_description": "Mechanisms for intervention, modification and safe management of AI systems including autonomous ones",
+      "risk_name": "Emergency response protocols activated inappropriately by autonomous systems",
+      "risk_description": "Automated crisis responses triggered by false signals or misinterpretation, causing unnecessary disruption or harm.",
+      "suggested_insight": "Established"
+    },
+    {
+      "id": 160,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "System control mechanisms",
+      "impact_area_description": "Mechanisms for intervention, modification and safe management of AI systems including autonomous ones",
+      "risk_name": "Systems develop capability to modify their own reward functions and objectives",
+      "risk_description": "Self-modification of fundamental motivations and goals beyond human oversight, potentially causing value misalignment.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 161,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "External Interfaces",
+      "impact_area": "External system interfaces",
+      "impact_area_description": "Management of AI system interactions with external tools, services, data sourcs and enviornments",
+      "risk_name": "Cross-system communication develops opaque AI-to-AI protocols",
+      "risk_description": "Inter-AI communication becomes incomprehensible to humans, preventing oversight of system coordination.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 162,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Novel Behaviour",
+      "impact_area": "Multi-agent interactions",
+      "impact_area_description": "Behaviour and coordination between multiple AI systems or components",
+      "risk_name": "System-of-systems develops Novel meta-objectives beyond individual system goals",
+      "risk_description": "Higher-order purposes emerge from multiple interacting systems that weren't present in any individual component.",
+      "suggested_insight": "Novel"
+    },
+    {
+      "id": 163,
+      "oecd_principle": "Robustness, security and safety",
+      "impact_domain": "Control & Oversight",
+      "impact_area": "Human agency and oversight",
+      "impact_area_description": "Human control and supervision of AI system operation including autonomous decision-making",
+      "risk_name": "Distributed decision-making becomes untraceable across multiple contributing systems",
+      "risk_description": "No clear accountability when multiple AI systems contribute to outcomes, preventing responsibility attribution.",
+      "suggested_insight": "Unsettled"
+    }
+  ]
+}

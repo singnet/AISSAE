@@ -1,0 +1,64 @@
+# .github/ISSUE_TEMPLATE/update-project.yml
+name: Update Existing AISaE Project
+description: Update an existing project's data in the dashboard
+title: "[UPDATE] Project Data Update"
+labels: ["update", "existing-project"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Update Existing AISaE Project
+        
+        Use this form to update your project's data in the dashboard after making changes to your template files.
+
+  - type: input
+    id: project-id
+    attributes:
+      label: Project ID
+      description: Your unique project ID from registration
+      placeholder: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    validations:
+      required: true
+
+  - type: input
+    id: repository
+    attributes:
+      label: Repository URL
+      description: Confirm your repository URL
+      placeholder: https://github.com/username/project-name
+    validations:
+      required: true
+
+  - type: textarea
+    id: changes
+    attributes:
+      label: What has changed?
+      description: Briefly describe what you've updated in your templates
+      placeholder: "Updated risk assessment, changed development stage, completed classification, etc."
+
+  - type: checkboxes
+    id: update-areas
+    attributes:
+      label: Areas Updated (Optional)
+      description: Check which template areas you've modified
+      options:
+        - label: Project classification (purpose, environment, control, capability)
+        - label: Implementation approach selection
+        - label: Risk assessment and register
+        - label: Risk threshold settings
+        - label: Development stage
+        - label: Other template content
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **What happens next?**
+        
+        1. We'll verify your Project ID matches your repository
+        2. Our system will re-scan all your template files
+        3. Your dashboard data will be updated with any changes
+        4. You'll receive a confirmation with your updated health score
+        
+        **Note:** Make sure your template files have properly filled markers (like `<!--%PROJ_NAME-->Your Project Name`) for the system to detect your updates.

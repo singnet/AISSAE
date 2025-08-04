@@ -1,0 +1,49 @@
+# .github/ISSUE_TEMPLATE/register-project.yml
+name: Register New AISaE Project
+description: Register a new project in the AISaE directory
+title: "[REGISTER] New Project Registration"
+labels: ["registration", "new-project"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Register New AISaE Project
+        Use this form to register a new project in the AISaE directory.
+
+  - type: input
+    id: repository
+    attributes:
+      label: Repository URL
+      description: The public GitHub repository URL for your project
+      placeholder: https://github.com/username/project-name
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: Registration Requirements
+      description: Please confirm you meet the following requirements
+      options:
+        - label: My repository is public
+          required: true
+        - label: I have created an `aisae_project_documents` folder in my repository
+          required: true
+        - label: I understand this registration will create a public entry in the AISaE directory
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **What happens next?**
+        
+        1. Our automated system will check if your repository is already registered
+        2. If not, you'll receive a unique Project ID immediately
+        3. The system will scan your `aisae_project_documents` folder for any existing template files
+        4. Your project will be added to the public AISaE directory
+        5. You can use your Project ID for future updates
+        
+        **Repository Format:**
+        Please ensure your repository URL is in the format: `https://github.com/username/repository-name`
