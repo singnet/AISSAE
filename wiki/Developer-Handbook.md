@@ -2,7 +2,7 @@
 
 Practical support in building beneficial AI
 
-V0.43 16-Jul-25
+V0.44 16-Jul-25
 
 ## Introduction to the Framework
 
