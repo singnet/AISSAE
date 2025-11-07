@@ -15,7 +15,7 @@
 > * Update your project
 > * Remove your project
 * Access the AISSE Developer Companion AI
-* Clone the [template directory](https://github.com/TechInnocens/AISaE_Patterns/tree/main/aisse_project_documents) to your project repository
+* Clone the [template directory](https://github.com/singnet/AISSAE/tree/master/aisse_project_documents) to your project repository
 
 ### Use resources
 * Review the impacts and risks in the [AISSE Risk Taxonomy](https://techinnocens.github.io/AISaE_Patterns/taxonomy.html)
