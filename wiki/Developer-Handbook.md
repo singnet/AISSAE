@@ -181,7 +181,7 @@ This below grid provides details of the templates utilised by the directory syst
     <td width="20" align="center" valign="middle">→</td>
     <td valign="middle">
       Project is registered on the AISSE Directory.<br>
-      Evidenced by: Filled <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/project_details.md">Project Details template</a> and registration
+      Evidenced by: Filled <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/project_details.md">Project Details template</a> and registration
     </td>
   </tr>
   <tr>
@@ -189,7 +189,7 @@ This below grid provides details of the templates utilised by the directory syst
     <td width="20" align="center" valign="middle">→</td>
     <td valign="middle">
       Project has a researched list of relevant Values and Risks<br>
-      Evidenced by: Entries in Impact Areas Identified and Risk Identified tables in <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/prioritisation_record.md">Prioritisation Record Template</a> (prioritisation not yet required)
+      Evidenced by: Entries in Impact Areas Identified and Risk Identified tables in <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/prioritisation_record.md">Prioritisation Record Template</a> (prioritisation not yet required)
     </td>
   </tr>
   <tr>
@@ -197,7 +197,7 @@ This below grid provides details of the templates utilised by the directory syst
     <td width="20" align="center" valign="middle">→</td>
     <td valign="middle">
       Project has prioritised their risks, agreed goals for values and set risk category thresholds<br>
-      Evidenced by: Updated <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/prioritisation_record.md">Prioritisation Record Template</a> with prioritisation in Impact Areas Identified and Risk Identified tables, and AISSE Decision Section completed.
+      Evidenced by: Updated <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/prioritisation_record.md">Prioritisation Record Template</a> with prioritisation in Impact Areas Identified and Risk Identified tables, and AISSE Decision Section completed.
     </td>
   </tr>
   <tr>
@@ -205,7 +205,7 @@ This below grid provides details of the templates utilised by the directory syst
     <td width="20" align="center" valign="middle">→</td>
     <td valign="middle">
       Project has user stories/requirements for values-goals and has started risk reviews<br>
-      Evidenced by: Filled <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/feature_development_plan.md">Feature Development Plan Template</a> and filled <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/risk_management_plan.md">Risk Management Plan Template</a>
+      Evidenced by: Filled <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/feature_development_plan.md">Feature Development Plan Template</a> and filled <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/risk_management_plan.md">Risk Management Plan Template</a>
     </td>
   </tr>
   <tr>
@@ -221,7 +221,7 @@ This below grid provides details of the templates utilised by the directory syst
     <td width="20" align="center" valign="middle">→</td>
     <td valign="middle">
       Project has an in-life monitoring in place aligned to risks and values.<br>
-      Evidenced by: Project in Operations stage; filled <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/in_life_monitoring_plan.md">In-Life Monitoring Plan Template</a>
+      Evidenced by: Project in Operations stage; filled <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/in_life_monitoring_plan.mdc">In-Life Monitoring Plan Template</a>
     </td>
   </tr>
   <tr>
