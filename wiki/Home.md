@@ -3,9 +3,9 @@
 ## What do you want to do?
 
 ### Learn more
-* Learn about the AISSE Framework in [Introduction](Introduction-to-the-AISSE-Framework)
-* Get more detail, as a developer in [the developer handbook](developer-handbook)
-* See a [typical Workflow](aisse-development-workflow-suggestion) for using the Framework
+* Learn about the AISSE Framework in [Introduction](https://github.com/singnet/AISSAE/blob/master/wiki/Introduction-to-the-AISSE-Framework.md)
+* Get more detail, as a developer in [the developer handbook](https://github.com/singnet/AISSAE/blob/master/wiki/Developer-Handbook.md)
+* See a [typical Workflow](https://github.com/singnet/AISSAE/blob/master/wiki/AISSE-Development-Workflow-Suggestion.md) for using the Framework
 * Learn about the badging levels
 * Understand how to fill the templates
 
@@ -25,6 +25,7 @@
 * Access the AISSE Pattern Repo, to see how other developers tackled mitigating risks and solving design challenges
 
 ### Explore
-* Check the projects using the framework in the [AISSE-listed projects explorer](https://techinnocens.github.io/AISaE_Patterns/dashboard.html)
+* Check the projects using the framework in the [AISSE-listed projects explorer](https://github.com/singnet/AISSAE/tree/master/samples)
+
 
 
