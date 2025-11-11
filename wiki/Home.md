@@ -18,7 +18,7 @@
 * Clone the [template directory](https://github.com/singnet/AISSAE/tree/master/aisse_project_documents) to your project repository
 
 ### Use resources
-* Review the impacts and risks in the [AISSE Risk Taxonomy](https://techinnocens.github.io/AISaE_Patterns/taxonomy.html)
+* Review the impacts and risks in the [AISSE Risk Taxonomy](https://github.com/singnet/AISSAE/blob/master/docs/taxonomy.html)
 * Check what services the community are offering to help with your specific challenges
 * Review the community tools available for different risks
 * Access the Risk Profile Repo, to see what risks similar projects took on
@@ -26,4 +26,5 @@
 
 ### Explore
 * Check the projects using the framework in the [AISSE-listed projects explorer](https://techinnocens.github.io/AISaE_Patterns/dashboard.html)
+
 
