@@ -42,13 +42,13 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent; line-height: 1.2;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em; line-height: 1.2;">
-        <b>Where/how:</b> Fill out the <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/project_details.md">Project Details template</a>. This file is used in Directory registration.
+        <b>Where/how:</b> Fill out the <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/project_details.md">Project Details template</a>. This file is used in Directory registration.
       </td>
     </tr>
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent; line-height: 1.2;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em; line-height: 1.2;">
-        <b>What else</b> (optional): You can use the <a href="https://techinnocens.github.io/AISaE_Patterns/taxonomy.html">Risk Taxonomy</a>to explore the risk landscape
+        <b>What else</b> (optional): You can use the <a href="https://github.com/singnet/AISSAE/blob/master/docs/taxonomy.html">Risk Taxonomy</a>to explore the risk landscape
       </td>
     </tr>
     <tr>
@@ -75,7 +75,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent; line-height: 1.2;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em; line-height: 1.2;">
-        <b>Where/how:</b> <a href="#"><u>Guide to registering</u></a>. You should also update when you have made changes, these are not detected automatically. Registering will mean you can utilise the "AISSE Registered" badge.
+        <b>Where/how:</b> <a href="https://github.com/singnet/AISSAE/blob/master/.github/ISSUE_TEMPLATE/register-project.yml"><u>Guide to registering</u></a>. You should also update when you have made changes, these are not detected automatically. Registering will mean you can utilise the "AISSE Registered" badge.
       </td>
     </tr>
     <tr>
@@ -156,7 +156,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent; line-height: 1.2;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em; line-height: 1.2;">
-        <b>Where/how:</b> To organise workshops or working-group sessions: The <a href="https://techinnocens.github.io/AISaE_Patterns/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running these and other sessions both in person and virtually, as well as links to suggested tools. Utilise the Community of Practice* to identify help from experts or experienced stakeholders. The <a href="https://techinnocens.github.io/AISaE_Patterns/taxonomy.html">AISSE Risk Taxonomy</a> can be utilised in these sessions to assist in exploring risks and values.
+        <b>Where/how:</b> To organise workshops or working-group sessions: The <a href="https://github.com/singnet/AISSAE/blob/master/docs/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running these and other sessions both in person and virtually, as well as links to suggested tools. Utilise the Community of Practice* to identify help from experts or experienced stakeholders. The <a href="https://github.com/singnet/AISSAE/blob/master/ai-risk-taxonomy/data/taxonomy.csv">AISSE Risk Taxonomy</a> can be utilised in these sessions to assist in exploring risks and values.
       </td>
     </tr>
     <tr>
@@ -211,7 +211,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent; line-height: 1.2;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em; line-height: 1.2;">
-        <b>Where:</b> Simple guides are available to help you make these decisions. You should fill out the <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/prioritisation_record.md">Priortisation Record</a> template with the badge level, risk/impacts selected, and the thresholds you set. This document forms part of your directory entry and needs to be in the AISSE folder.
+        <b>Where:</b> Simple guides are available to help you make these decisions. You should fill out the <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/prioritisation_record.md">Priortisation Record</a> template with the badge level, risk/impacts selected, and the thresholds you set. This document forms part of your directory entry and needs to be in the AISSE folder.
       </td>
     </tr>
   </tbody>
@@ -250,7 +250,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em;">
-        <b>Where/how:</b> The <a href="https://techinnocens.github.io/AISaE_Patterns/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running this and other sessions both in person and virtually, as well as links to suggested tools. You should fill out the <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/feature_development_plan.md">Feature Development Plan</a>. This document forms part of your directory entry and needs to be in the AISSE folder. Guidance is available for this activity.
+        <b>Where/how:</b> The <a href="https://github.com/singnet/AISSAE/blob/master/docs/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running this and other sessions both in person and virtually, as well as links to suggested tools. You should fill out the <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/feature_development_plan.md">Feature Development Plan</a>. This document forms part of your directory entry and needs to be in the AISSE folder. Guidance is available for this activity.
       </td>
     </tr>
     <tr>
@@ -297,7 +297,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em;">
-        <b>Where/how:</b> The <a href="https://techinnocens.github.io/AISaE_Patterns/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running this and other sessions both in person and virtually, as well as links to suggested tools. The <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/risk_management_plan.md">Risk Management Plan</a>template is provided for storing your risk register with current scoring. This document forms part of your directory entry and needs to be in the AISSE folder. 
+        <b>Where/how:</b> The <a href="https://github.com/singnet/AISSAE/blob/master/docs/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running this and other sessions both in person and virtually, as well as links to suggested tools. The <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/risk_management_plan.md">Risk Management Plan</a>template is provided for storing your risk register with current scoring. This document forms part of your directory entry and needs to be in the AISSE folder. 
       </td>
     </tr>
     <tr>
@@ -342,7 +342,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em;">
-        <b>Where/how:</b> The <a href="https://techinnocens.github.io/AISaE_Patterns/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running this and other sessions both in person and virtually, as well as links to suggested tools. Update the Risk Management template when you've reviewed risks
+        <b>Where/how:</b> The <a href="https://github.com/singnet/AISSAE/blob/master/docs/workshop_playbooks.html">AISSE Playbook</a> contains guidance for running this and other sessions both in person and virtually, as well as links to suggested tools. Update the Risk Management template when you've reviewed risks
       </td>
     </tr>
     <tr>
@@ -375,7 +375,7 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     <tr>
       <td width="75" valign="middle" style="border: none; background-color: transparent; line-height: 1.2;"></td>
       <td valign="middle" style="border: none; background-color: transparent; padding-left: 0.5em; line-height: 1.2;">
-        <b>Where/how:</b> The <a href="https://github.com/TechInnocens/AISaE_Patterns/blob/main/aisse_project_documents/in_life_monitoring_plan.md">In-Life Monitoring Plan</a> is available for storing your monitoring approach together with a set of measures. This document forms part of your directory entry after go-live and needs to be in the AISSE folder. The AISSE toolkit has resources available to help you form your monitoring plan.
+        <b>Where/how:</b> The <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/in_life_monitoring_plan.md">In-Life Monitoring Plan</a> is available for storing your monitoring approach together with a set of measures. This document forms part of your directory entry after go-live and needs to be in the AISSE folder. The AISSE toolkit has resources available to help you form your monitoring plan.
       </td>
     </tr>
   </tbody>
@@ -462,4 +462,5 @@ Icons in the first column refer to AISSE Directory "milestones" that will be vis
     </tr>
   </tbody>
 </table>
+
 <br>
