@@ -15,4 +15,5 @@ Directories:
 
 # AISaE Docs
 
-Visit [Docs page](/docs)
+[Visit Docs on github pages](https://singnet.github.io/AISSAE/docs/)
+
