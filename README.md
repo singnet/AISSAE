@@ -12,3 +12,7 @@ Directories:
 /profiles/ - documents with information on previous projects' risk profiles for similar projects
 /registry/ - placeholder directory for debugging directory automation
 /templates/ - other template documentation
+
+# AISaE Docs
+
+Visit [Docs page](/docs)
