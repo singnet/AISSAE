@@ -544,7 +544,7 @@ guidance<br />
 running this and other sessions both in person and virtually, as well as
 links to suggested tools. Utilise the Community of Practice* to identify
 help from experts or experienced staekholders. The <a
-href="https://techinnocens.github.io/AISaE_Patterns/taxonomy.html">AISSE
+href="https://github.com/singnet/AISSAE/blob/master/ai-risk-taxonomy/data/taxonomy.csv">AISSE
 Risk Taxonomy</a> can be utilised in these sessions to assist in
 exploring risks and values.</p>
 <p><strong>Choose Your Badge Level</strong></p>
