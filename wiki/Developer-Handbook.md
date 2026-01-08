@@ -221,7 +221,7 @@ This below grid provides details of the templates utilised by the directory syst
     <td width="20" align="center" valign="middle">→</td>
     <td valign="middle">
       Project has an in-life monitoring in place aligned to risks and values.<br>
-      Evidenced by: Project in Operations stage; filled <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/in_life_monitoring_plan.mdc">In-Life Monitoring Plan Template</a>
+      Evidenced by: Project in Operations stage; filled <a href="https://github.com/singnet/AISSAE/blob/master/aisse_project_documents/in_life_monitoring_plan.md">In-Life Monitoring Plan Template</a>
     </td>
   </tr>
   <tr>
