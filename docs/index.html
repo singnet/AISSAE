@@ -314,23 +314,23 @@
             <h1>AISaE Project Resources</h1>
             <p>Register and manage your project with the Framework</p>
         </div>
-        
+
         <div class="content">
             <!-- Login Screen -->
             <div id="login-screen">
                 <div class="login-container">
                     <h2>Access Required</h2>
                     <p>Please enter the access code to continue</p>
-                    
+
                     <div id="login-alert" class="alert"></div>
-                    
+
                     <form id="login-form">
                         <div class="form-group">
                             <label for="access-code">Access Code</label>
-                            <input type="password" id="access-code" required 
+                            <input type="password" id="access-code" required
                                    placeholder="Enter access code">
                         </div>
-                        
+
                         <button type="submit" class="btn">
                             <span>Access System</span>
                         </button>
@@ -351,28 +351,28 @@
                 <div id="register" class="tab-content active">
                     <h2>Register New Project</h2>
                     <p>Register your repository to start tracking your AISaE implementation.</p>
-                    
+
                     <div id="register-alert" class="alert"></div>
-                    
+
                     <form id="register-form">
                         <div class="form-group">
                             <label for="repo-url">Repository URL *</label>
-                            <input type="url" id="repo-url" required 
+                            <input type="url" id="repo-url" required
                                    placeholder="https://github.com/username/repository">
                             <div class="help-text">Your public GitHub repository URL</div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="contact-email">Contact Email (optional)</label>
-                            <input type="email" id="contact-email" 
+                            <input type="email" id="contact-email"
                                    placeholder="your.email@example.com">
                             <div class="help-text">For important updates about your project</div>
                         </div>
-                        
+
                         <button type="submit" class="btn">
                             <span>Register Project</span>
                         </button>
-                        
+
                         <div class="loading" id="register-loading">
                             <div class="spinner"></div>
                             <span>Registering project...</span>
@@ -384,29 +384,29 @@
                 <div id="update" class="tab-content">
                     <h2>Update Project</h2>
                     <p>Scan your repository for updated template content and refresh your health score.</p>
-                    
+
                     <div id="update-alert" class="alert"></div>
-                    
+
                     <form id="update-form">
                         <div class="form-group">
                             <label for="project-id">Project ID *</label>
-                            <input type="text" id="project-id" required 
+                            <input type="text" id="project-id" required
                                    placeholder="12345678-1234-1234-1234-123456789abc"
                                    pattern="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}">
                             <div class="help-text">The UUID you received when registering your project</div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="update-repo-url">Repository URL *</label>
-                            <input type="url" id="update-repo-url" required 
+                            <input type="url" id="update-repo-url" required
                                    placeholder="https://github.com/username/repository">
                             <div class="help-text">Must match the repository URL from registration</div>
                         </div>
-                        
+
                         <button type="submit" class="btn">
                             <span>Update Project</span>
                         </button>
-                        
+
                         <div class="loading" id="update-loading">
                             <div class="spinner"></div>
                             <span>Updating project data...</span>
@@ -418,28 +418,28 @@
                 <div id="dashboard" class="tab-content">
                     <h2>Project Dashboard</h2>
                     <p>View your project status and progress through the AISaE framework.</p>
-                    
+
                     <div id="dashboard-alert" class="alert"></div>
-                    
+
                     <form id="dashboard-form">
                         <div class="form-group">
                             <label for="dashboard-project-id">Project ID *</label>
-                            <input type="text" id="dashboard-project-id" required 
+                            <input type="text" id="dashboard-project-id" required
                                    placeholder="12345678-1234-1234-1234-123456789abc"
                                    pattern="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}">
                             <div class="help-text">Enter your Project ID to view dashboard</div>
                         </div>
-                        
+
                         <button type="submit" class="btn">
                             <span>Load Dashboard</span>
                         </button>
-                        
+
                         <div class="loading" id="dashboard-loading">
                             <div class="spinner"></div>
                             <span>Loading project data...</span>
                         </div>
                     </form>
-                    
+
                     <div id="dashboard-content" style="display: none;">
                         <div class="project-info">
                             <h3 id="project-name">Project Name</h3>
@@ -447,7 +447,7 @@
                             <p><strong>Status:</strong> <span id="project-status" class="status-badge">Unknown</span></p>
                             <p><strong>Last Updated:</strong> <span id="project-updated">Never</span></p>
                         </div>
-                        
+
                         <div class="dashboard-grid">
                             <div class="dashboard-card">
                                 <h3>Health Score</h3>
@@ -470,7 +470,7 @@
                                 <div>Complete</div>
                             </div>
                         </div>
-                        
+
                         <div id="project-details" class="project-info">
                             <h3>Project Details</h3>
                             <div id="details-content"></div>
@@ -482,16 +482,16 @@
                 <div id="taxonomy" class="tab-content">
                     <h2>AISaE Risk Taxonomy</h2>
                     <p>Explore the comprehensive risk taxonomy for AI Safety and Ethics projects.</p>
-                    
+
                     <div class="taxonomy-info">
                         <h3>Interactive Risk Taxonomy</h3>
                         <p>The AISaE Risk Taxonomy provides a structured approach to identifying and categorising AI-related risks across different domains and contexts. This interactive tool helps you explore risk categories, understand their relationships, and identify relevant risks for your project.</p>
-                        
+
                         <a href="taxonomy.html" class="taxonomy-link" target="_blank">
                             🔍 Open Risk Taxonomy Tool
                         </a>
                     </div>
-                    
+
                     <div class="project-info">
                         <h3>How to Use the Taxonomy</h3>
                         <p><strong>1. Explore Categories:</strong> Browse through different risk domains and facets</p>
@@ -508,19 +508,20 @@
         // Configuration
         const GITHUB_OWNER = 'singnet'; // Replace with your GitHub username
         const GITHUB_REPO = 'AISSAE'; // Replace with your repository name
-        const GITHUB_TOKEN = 'nope'; // Optional: GitHub token for authenticated requests
+        // const GITHUB_TOKEN = 'nope'; // Optional: GitHub token for authenticated requests
+        const GITHUB_TOKEN = "__GH_TOKEN__";
         const ACCESS_CODE = 'aisae2024'; // Change this to your desired password
 
         // Login handling
         document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             const enteredCode = document.getElementById('access-code').value;
-            
+
             if (enteredCode === ACCESS_CODE) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-interface').style.display = 'block';
-                
+
                 // Store login state in sessionStorage
                 sessionStorage.setItem('aisae_authenticated', 'true');
             } else {
@@ -543,12 +544,12 @@
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
-            
+
             // Remove active class from all tabs
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             // Show selected tab content and mark tab as active
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
@@ -578,7 +579,7 @@
                 'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json'
             };
-            
+
             if (GITHUB_TOKEN) {
                 headers['Authorization'] = `token ${GITHUB_TOKEN}`;
             }
@@ -603,13 +604,13 @@
         // Register project form handler
         document.getElementById('register-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const repoUrl = document.getElementById('repo-url').value.trim();
             const contactEmail = document.getElementById('contact-email').value.trim();
-            
+
             hideAlert('register-alert');
             toggleLoading('register-loading', true);
-            
+
             try {
                 const title = '[REGISTER] New AISaE Project Registration';
                 const body = `Repository URL: ${repoUrl}
@@ -620,18 +621,18 @@ Contact Email: ${contactEmail || 'Not provided'}
 Automated registration request from AISaE Project Management interface.`;
 
                 const issue = await createGitHubIssue(title, body, ['registration', 'automated']);
-                
-                showAlert('register-alert', 
-                    `Registration request submitted successfully! Issue #${issue.number} created. You will receive your Project ID when the registration is processed.`, 
+
+                showAlert('register-alert',
+                    `Registration request submitted successfully! Issue #${issue.number} created. You will receive your Project ID when the registration is processed.`,
                     'success');
-                
+
                 // Clear form
                 document.getElementById('register-form').reset();
-                
+
             } catch (error) {
                 console.error('Registration error:', error);
-                showAlert('register-alert', 
-                    `Registration failed: ${error.message}. Please try again or contact support.`, 
+                showAlert('register-alert',
+                    `Registration failed: ${error.message}. Please try again or contact support.`,
                     'error');
             } finally {
                 toggleLoading('register-loading', false);
@@ -641,13 +642,13 @@ Automated registration request from AISaE Project Management interface.`;
         // Update project form handler
         document.getElementById('update-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const projectId = document.getElementById('project-id').value.trim();
             const repoUrl = document.getElementById('update-repo-url').value.trim();
-            
+
             hideAlert('update-alert');
             toggleLoading('update-loading', true);
-            
+
             try {
                 const title = '[UPDATE] AISaE Project Update Request';
                 const body = `Project ID: ${projectId}
@@ -658,18 +659,18 @@ Repository URL: ${repoUrl}
 Automated update request from AISaE Project Management interface.`;
 
                 const issue = await createGitHubIssue(title, body, ['update', 'automated']);
-                
-                showAlert('update-alert', 
-                    `Update request submitted successfully! Issue #${issue.number} created. Your project data will be refreshed shortly.`, 
+
+                showAlert('update-alert',
+                    `Update request submitted successfully! Issue #${issue.number} created. Your project data will be refreshed shortly.`,
                     'success');
-                
+
                 // Clear form
                 document.getElementById('update-form').reset();
-                
+
             } catch (error) {
                 console.error('Update error:', error);
-                showAlert('update-alert', 
-                    `Update failed: ${error.message}. Please check your Project ID and repository URL.`, 
+                showAlert('update-alert',
+                    `Update failed: ${error.message}. Please check your Project ID and repository URL.`,
                     'error');
             } finally {
                 toggleLoading('update-loading', false);
@@ -679,45 +680,45 @@ Automated update request from AISaE Project Management interface.`;
         // Dashboard form handler
         document.getElementById('dashboard-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const projectId = document.getElementById('dashboard-project-id').value.trim();
-            
+
             hideAlert('dashboard-alert');
             toggleLoading('dashboard-loading', true);
-            
+
             try {
                 // Try to load project data from registry
                 const response = await fetch(`https://${GITHUB_OWNER}.github.io/${GITHUB_REPO}/registry/${projectId}.json`);
-                
+
                 if (!response.ok) {
                     throw new Error('Project not found. Please check your Project ID.');
                 }
-                
+
                 const projectData = await response.json();
-                
+
                 // Update dashboard display
                 document.getElementById('project-name').textContent = projectData.name || 'Unknown Project';
                 document.getElementById('project-repo').textContent = projectData.repository_url || '';
                 document.getElementById('project-repo').href = projectData.repository_url || '';
-                
+
                 const healthScore = projectData.health_score || 0;
                 document.getElementById('health-score').textContent = healthScore;
-                
+
                 // Update status badge
                 const statusElement = document.getElementById('project-status');
                 const status = projectData.health_status || 'unknown';
                 statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
                 statusElement.className = `status-badge status-${status}`;
-                
+
                 // Update last updated
                 const lastUpdated = projectData.last_updated || projectData.registered_at || 'Never';
                 document.getElementById('project-updated').textContent = new Date(lastUpdated).toLocaleString();
-                
+
                 // Update completion indicators
                 document.getElementById('classification-status').textContent = healthScore >= 30 ? '✅' : '❌';
                 document.getElementById('approach-status').textContent = healthScore >= 60 ? '✅' : '❌';
                 document.getElementById('risk-status').textContent = healthScore >= 100 ? '✅' : '❌';
-                
+
                 // Show project details
                 const detailsContent = document.getElementById('details-content');
                 detailsContent.innerHTML = `
@@ -726,16 +727,16 @@ Automated update request from AISaE Project Management interface.`;
                     <p><strong>Classification String:</strong> ${projectData.classification_string || 'Not set'}</p>
                     <p><strong>Approach Number:</strong> ${projectData.approach_number || 'Not chosen'}</p>
                 `;
-                
+
                 // Show dashboard content
                 document.getElementById('dashboard-content').style.display = 'block';
-                
+
                 showAlert('dashboard-alert', 'Project data loaded successfully!', 'success');
-                
+
             } catch (error) {
                 console.error('Dashboard error:', error);
-                showAlert('dashboard-alert', 
-                    `Failed to load project data: ${error.message}`, 
+                showAlert('dashboard-alert',
+                    `Failed to load project data: ${error.message}`,
                     'error');
                 document.getElementById('dashboard-content').style.display = 'none';
             } finally {
@@ -746,17 +747,17 @@ Automated update request from AISaE Project Management interface.`;
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             console.log('AISaE Project Management Interface loaded');
-            
+
             // Check if we have URL parameters for auto-filling forms
             const urlParams = new URLSearchParams(window.location.search);
             const projectId = urlParams.get('project_id');
             const repoUrl = urlParams.get('repo_url');
-            
+
             if (projectId) {
                 document.getElementById('project-id').value = projectId;
                 document.getElementById('dashboard-project-id').value = projectId;
             }
-            
+
             if (repoUrl) {
                 document.getElementById('repo-url').value = repoUrl;
                 document.getElementById('update-repo-url').value = repoUrl;
