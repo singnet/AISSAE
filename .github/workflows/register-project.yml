@@ -31,7 +31,7 @@ jobs:
     - name: Create shared modules
       run: |
         mkdir -p shared
-        sed -i "s|__API_URL__|${{ secrets.GH_TOKEN }}|g" ./docs/index.html
+        sed -i "s|__GH_TOKEN__|${{ secrets.GH_TOKEN }}|g" ./docs/index.html
         # Copy the module files - in practice these would be in your repo
         cp .github/shared/template-parser.js shared/
         cp .github/shared/database-operations.js shared/
