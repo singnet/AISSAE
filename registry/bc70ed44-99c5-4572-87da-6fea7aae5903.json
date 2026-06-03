@@ -2,8 +2,9 @@
   "id": "bc70ed44-99c5-4572-87da-6fea7aae5903",
   "name": "Unknown Project",
   "repository_url": "https://github.com/colleenpridemore/Molten",
-  "registered": "2026-06-03T11:06:36Z",
+  "last_updated": "2026-06-03T21:14:43Z",
   "progress_stage": "registered",
   "health_score": 0,
-  "health_status": "Unknown"
+  "health_status": "Unknown",
+  "files_processed": ""
 }
