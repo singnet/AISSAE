@@ -1,0 +1,65 @@
+name: Incident Report
+description: Something the agent did that seemed wrong, weird, or worth noting
+labels: ["incident"]
+body:
+
+  # --- What happened ---
+- type: textarea
+  id: what-happened
+  attributes:
+    label: What did the agent do?
+    description: Describe what you observed. No need to diagnose it — just tell us what happened.
+    placeholder: "The agent was supposed to X, but instead it Y..."
+  validations:
+    required: true
+
+- type: textarea
+  id: what-you-expected
+  attributes:
+    label: What did you expect?
+    placeholder: "I expected it to..."
+  validations:
+    required: false
+
+# --- Reproducibility ---
+- type: dropdown
+  id: reproducible
+  attributes:
+    label: Did it happen more than once?
+    options:
+      - Yes, reliably
+      - Sometimes
+      - Only once so far
+      - Not sure
+  validations:
+    required: false
+
+- type: textarea
+  id: steps
+  attributes:
+    label: Steps to reproduce (if you have them)
+    description: A rough sequence is fine. Include any relevant prompts, tool calls, or context.
+    placeholder: "1. Asked the agent to...\n2. It called...\n3. Then..."
+  validations:
+    required: false
+
+# --- Context ---
+- type: dropdown
+  id: concern-level
+  attributes:
+    label: How would you characterise this?
+    options:
+      - Mildly odd — probably fine, just noting it
+      - Unexpected — worth investigating
+      - Concerning — something felt wrong
+      - Not sure
+  validations:
+    required: false
+
+- type: textarea
+  id: context
+  attributes:
+    label: Anything else?
+    description: Logs, screenshots, model version, config — whatever feels relevant.
+  validations:
+    required: false
