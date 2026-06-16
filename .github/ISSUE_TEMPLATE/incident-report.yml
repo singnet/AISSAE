@@ -1,4 +1,4 @@
-name: Incident Report
+name: Observed Behaviour Report
 description: Something the agent did that seemed wrong, weird, or worth noting
 labels: ["incident"]
 body:
