@@ -1,6 +1,6 @@
 name: Observed Behaviour Report
-description: Something the agent did that seemed wrong, weird, or worth noting
-labels: ["incident"]
+description: Something the agent did that seemed worth noting, weird, or wrong.
+labels: ["behaviour"]
 body:
 
   # --- What happened ---
